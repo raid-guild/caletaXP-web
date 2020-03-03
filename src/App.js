@@ -1,6 +1,9 @@
 import React, { useContext } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+
 import { Web3SignIn } from './components/account/Web3SignIn';
 import { CurrentUserContext } from './contexts/Store';
+import Routes from './Routes';
 
 function App() {
   const [currentUser, setCurrentUser] = useContext(CurrentUserContext);
@@ -13,6 +16,11 @@ function App() {
       ) : (
         <Web3SignIn setCurrentUser={setCurrentUser} />
       )}
+
+      <Router>
+        {/* <Header /> */}
+        <Routes />
+      </Router>
     </div>
   );
 }
