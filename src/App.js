@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
-import { Web3SignIn } from "./components/account/Web3SignIn";
-import { CurrentUserContext } from "./contexts/Store";
+import React, { useContext } from 'react';
+import { Web3SignIn } from './components/account/Web3SignIn';
+import { CurrentUserContext } from './contexts/Store';
 
 function App() {
   const [currentUser, setCurrentUser] = useContext(CurrentUserContext);
-  console.log("currentUser", currentUser);
+  console.log('currentUser', currentUser);
 
   return (
     <div className="App">

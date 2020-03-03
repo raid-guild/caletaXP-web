@@ -1,5 +1,7 @@
 # CaletaXP
 
+leaderboard/claiming dapp
+
 ## Development
 
 1. Install dependencies
@@ -11,7 +13,7 @@ $ yarn install
 2. Setup .env and fill out variables
 
 ```bash
-cp .env-sample .env
+cp .env.sample .env.local
 ```
 
 3. Run a dev server

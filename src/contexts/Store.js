@@ -1,7 +1,7 @@
-import React, { useState, useEffect, createContext } from "react";
-import Web3Connect from "web3connect";
-import { w3connect, providerOptions, createWeb3User } from "../utils/Auth";
-import { getChainData } from "../utils/Chains";
+import React, { useState, useEffect, createContext } from 'react';
+import Web3Connect from 'web3connect';
+import { w3connect, providerOptions, createWeb3User } from '../utils/Auth';
+import { getChainData } from '../utils/Chains';
 
 export const LoaderContext = createContext(false);
 export const Web3ConnectContext = createContext();
@@ -14,8 +14,8 @@ const Store = ({ children }) => {
     new Web3Connect.Core({
       network: getChainData(+process.env.REACT_APP_CHAIN_ID).network, // optional
       providerOptions, // required
-      cacheProvider: true
-    })
+      cacheProvider: true,
+    }),
   );
 
   useEffect(() => {
