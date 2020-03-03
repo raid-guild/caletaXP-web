@@ -15,7 +15,6 @@ const Games = () => {
               <Card.Body>
                 <Card.Title>{game.name}</Card.Title>
                 <Card.Text>{game.description}</Card.Text>
-                <Link to={`games/${game.id}`} />
               </Card.Body>
             </Card>
           </Link>
