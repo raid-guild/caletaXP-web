@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
+
 import ClaimFeed from '../../components/claims/ClaimFeed';
 import GamesList from '../../components/games/GamesList';
 
@@ -10,7 +11,6 @@ const Home = () => {
         <Col>
           <h2>Header</h2>
           <p>
-            <GamesList />
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
             feugiat ullamcorper neque nec aliquam. Fusce felis purus, tincidunt
             at ante id, consequat gravida nisl. Nulla ante leo, hendrerit ut
@@ -24,7 +24,9 @@ const Home = () => {
         </Col>
       </Row>
       <Row>
-        <Col></Col>
+        <Col>
+          <GamesList />
+        </Col>
       </Row>
     </>
   );

@@ -16,7 +16,6 @@ const Header = () => {
         <Nav>
           <Link to="/info">Info</Link>
           <Link to="/games">Games</Link>
-          <Link to="/ranks">Ranks</Link>
           {currentUser && currentUser.username ? (
             <Link to="/my-page">69 XP</Link>
           ) : null}

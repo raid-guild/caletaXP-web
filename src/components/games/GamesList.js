@@ -14,10 +14,8 @@ const GamesList = () => {
               <Card.Img variant="top" src="images/chili.jpg" />
               <Card.Body>
                 <Card.Title>{game.name}</Card.Title>
-                <Card.Text>
-                  <p>{game.playerCount} Players</p>
-                  <p>{game.totalXp} Xp</p>
-                </Card.Text>
+                <Card.Text>{game.playerCount} Players</Card.Text>
+                <Card.Text>{game.totalXp} Xp</Card.Text>
               </Card.Body>
             </Card>
           </Link>

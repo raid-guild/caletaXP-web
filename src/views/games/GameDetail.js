@@ -3,17 +3,19 @@ import { Row, Col } from 'react-bootstrap';
 
 import { CurrentUserContext } from '../../contexts/Store';
 import { Web3SignIn } from '../../components/account/Web3SignIn';
+import Rankings from '../../components/games/Rankings';
+import GameDetailCard from '../../components/games/GameDetailCard';
+
+import { GAME_DATA } from '../../utils/Data';
 
 const GameDetail = props => {
   const [currentUser, setCurrentUser] = useContext(CurrentUserContext);
+  const game = GAME_DATA.find(game => game.id === +props.match.params.game);
 
   return (
     <div>
-      <h1>Game Detail</h1>
       <Row>
-        <Col>
-          <h2>Game {props.match.params.game}</h2>
-        </Col>
+        <GameDetailCard game={game} />
         <Col>
           {currentUser && currentUser.username ? (
             <p>{currentUser.username}</p>
@@ -24,6 +26,10 @@ const GameDetail = props => {
             </>
           )}
         </Col>
+      </Row>
+      <Row>
+        <h3>Rankings</h3>
+        <Rankings />
       </Row>
     </div>
   );
