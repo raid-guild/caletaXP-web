@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 import { CurrentUserContext } from '../../contexts/Store';
@@ -7,10 +7,22 @@ import Rankings from '../../components/games/Rankings';
 import GameDetailCard from '../../components/games/GameDetailCard';
 
 import { GAME_DATA } from '../../utils/Data';
+import { get } from '../../utils/Requests';
 
 const GameDetail = props => {
   const [currentUser, setCurrentUser] = useContext(CurrentUserContext);
   const game = GAME_DATA.find(game => game.id === +props.match.params.game);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await get('test');
+
+      console.log('res', res);
+    };
+
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div>
