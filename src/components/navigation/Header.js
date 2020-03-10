@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
-import { CurrentUserContext } from '../../contexts/Store';
+// import { CurrentUserContext } from '../../contexts/Store';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
-  const [currentUser] = useContext(CurrentUserContext);
+  // const [currentUser] = useContext(CurrentUserContext);
 
   return (
     <Navbar bg="light" expand="lg">
@@ -15,10 +15,10 @@ const Header = () => {
       <Navbar.Collapse className="justify-content-end">
         <Nav>
           <Link to="/info">Info</Link>
-          <Link to="/games">Games</Link>
+          {/* <Link to="/games">Games</Link>
           {currentUser && currentUser.username ? (
             <Link to="/my-page">69 XP</Link>
-          ) : null}
+          ) : null} */}
         </Nav>
       </Navbar.Collapse>
     </Navbar>
