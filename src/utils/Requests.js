@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 export const BaseUrl = () => {
-  return 'https://52.206.204.123:1880/';
+  // return 'https://52.206.204.123:1880/';
+  return process.env.REACT_APP_API_URL;
 };
 
 export const get = async endpoint => {
