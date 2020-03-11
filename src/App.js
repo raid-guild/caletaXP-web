@@ -1,18 +1,19 @@
-import React, { useContext } from "react";
-import { Web3SignIn } from "./components/account/Web3SignIn";
-import { CurrentUserContext } from "./contexts/Store";
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
+
+import Routes from './Routes';
+import Header from './components/navigation/Header';
 
 function App() {
-  const [currentUser, setCurrentUser] = useContext(CurrentUserContext);
-  console.log("currentUser", currentUser);
-
   return (
     <div className="App">
-      {currentUser && currentUser.username ? (
-        <p>{currentUser.username}</p>
-      ) : (
-        <Web3SignIn setCurrentUser={setCurrentUser} />
-      )}
+      <Router>
+        <Header />
+        <Container>
+          <Routes />
+        </Container>
+      </Router>
     </div>
   );
 }
