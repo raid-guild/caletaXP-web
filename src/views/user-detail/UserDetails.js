@@ -1,27 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Row, Col, Spinner, Button } from 'react-bootstrap';
 import OneUpFeed from '../../components/claims/OneUpFeed';
 import { get } from '../../utils/Requests';
+import { useInterval } from '../../utils/PollingUtil';
 
 const UserDetail = ({ match }) => {
   const [loading, setLoading] = useState(false);
   const [oneUps, setOneUps] = useState([]);
+  const [delay, setDelay] = useState(300);
 
-  useEffect(() => {
-    const fetchData = async () => {
+  const fetchData = async () => {
+    if (delay === 300) {
       setLoading(true);
-      const res = await get(`one-up/${match.params.username}`);
+    }
+    const res = await get(`one-up/${match.params.username}`);
 
-      setOneUps(res.data);
+    setOneUps(res.data);
+    setLoading(false);
+    setDelay(3000);
+  };
 
-      setLoading(false);
-
-      console.log('res', res);
-    };
-
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  useInterval(fetchData, delay);
 
   return (
     <>

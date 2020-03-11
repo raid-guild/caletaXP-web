@@ -1,29 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Row, Col, Tabs, Tab, Button, Spinner } from 'react-bootstrap';
 
 import OneUpFeed from '../../components/claims/OneUpFeed';
 import OneUpHighScores from '../../components/claims/OneUpHighScores';
 import { get } from '../../utils/Requests';
+import { useInterval } from '../../utils/PollingUtil';
 
 const Home = ({ history }) => {
-  // poll for new oneUps and pass down to each sub to do that math/sorting
   const [loading, setLoading] = useState(false);
   const [oneUps, setOneUps] = useState([]);
+  const [delay, setDelay] = useState(300);
 
-  useEffect(() => {
-    const fetchData = async () => {
+  const fetchData = async () => {
+    if (delay === 300) {
       setLoading(true);
-      const res = await get('one-ups');
-      console.log('res', res);
+    }
+    const res = await get('one-ups');
 
-      setOneUps(res.data);
-      setLoading(false);
-    };
+    setOneUps(res.data);
+    setLoading(false);
+    setDelay(3000);
+  };
 
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  useInterval(fetchData, delay);
 
   const handleNav = username => {
     const pathName = username.split('@')[1];
