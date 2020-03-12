@@ -74,7 +74,7 @@ h2 {
   line-height: 38px;
 }
 .text-info {
-    color: $solidblue !important;
+  color: $solidblue !important;
 }
 
 //Utility
@@ -94,26 +94,38 @@ h2 {
   }
 }
 .center-me {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .insert-coin {
-    width: 100%;
-    margin-top: 100px;
-    text-align: center;
+  width: 100%;
+  margin-top: 100px;
+  text-align: center;
 
-    animation:blinkingText 1.2s infinite;
+  animation: blinkingText 1.2s infinite;
 
-    @keyframes blinkingText{
-        0%{     color: rgb(22, 22, 22); text-shadow: none; filter: blur(15px);   }
-        29%{    color: rgb(15,15,15);  filter: blur(10px); }
-        60%{    color: $primary; text-shadow: none;}
-        100%{    color: $primary; text-shadow: none; filter: blur(1px); }
-
+  @keyframes blinkingText {
+    0% {
+      color: rgb(22, 22, 22);
+      text-shadow: none;
+      filter: blur(15px);
     }
+    29% {
+      color: rgb(15, 15, 15);
+      filter: blur(10px);
+    }
+    60% {
+      color: $primary;
+      text-shadow: none;
+    }
+    100% {
+      color: $primary;
+      text-shadow: none;
+      filter: blur(1px);
+    }
+  }
 }
-
 
 // Nav
 .Navbar {
@@ -187,14 +199,14 @@ h2 {
 }
 
 .tab-content {
-    border-style: double;
-    filter: blur(0.4px);
-    border-color: $primary;
-    outline: 1px solid $tertiary;
-    outline-offset: -9px;
-    padding: 20px 20px;
-    max-height: 50vh;
-    overflow-y: scroll;
+  border-style: double;
+  filter: blur(0.4px);
+  border-color: $primary;
+  outline: 1px solid $tertiary;
+  outline-offset: -9px;
+  padding: 20px 20px;
+  max-height: 50vh;
+  overflow-y: scroll;
   .tab-pane {
     table {
       thead {
@@ -288,7 +300,7 @@ table {
     color: $secondary;
   }
   .button-options {
-    text-align: right;
+    // text-align: right;
     .button-primary,
     p {
       margin-right: 20px;

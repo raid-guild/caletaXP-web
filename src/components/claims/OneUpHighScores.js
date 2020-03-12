@@ -45,9 +45,9 @@ const OneUpHighScores = ({ oneUps, handleNav }) => {
       <Table striped hover>
         <thead>
           <tr>
-            <th>#</th>
-            <th>1-Ups</th>
+            <th>Rank</th>
             <th>Name</th>
+            <th>1-Ups</th>
           </tr>
         </thead>
         <tbody>{renderRows()}</tbody>

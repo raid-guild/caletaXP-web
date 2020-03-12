@@ -36,16 +36,27 @@ const UserDetail = ({ match }) => {
           <Col>
             <h2 className="username">@{match.params.username}</h2>
             <h3 className="oneup-count">{oneUps.length || 0} 1-Ups</h3>
-          </Col>
-          <Col className="button-options">
-            <Button variant="info" disabled={true} className="button-primary">
-              Log in with web3
-            </Button>
-            <Button variant="info" disabled={true} className="button-primary">
-              Send to Dao
-            </Button>
+            <div className="button-options">
+              <Button variant="info" disabled={true} className="button-primary">
+                Log in with web3
+              </Button>
+              <Button variant="info" disabled={true} className="button-primary">
+                Send to Dao
+              </Button>
+            </div>
             <p>Coming soon</p>
           </Col>
+          <Col>
+            <p>
+              These are the points you have accumulated (or points that others
+              have given to you).{' '}
+            </p>
+            <p>
+              You’ll soon be able to submit these transactions to your community
+              DAO...stay tuned!
+            </p>
+          </Col>
+          {/* <Col ></Col> */}
         </Row>
         <Row>
           <Col>
