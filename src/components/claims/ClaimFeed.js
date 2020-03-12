@@ -3,7 +3,7 @@ import { Table } from 'react-bootstrap';
 
 const ClaimFeed = () => {
   return (
-    <Table striped bordered hover variant="dark">
+    <Table bordered hover variant="dark">
       <thead>
         <tr>
           <th>#</th>
