@@ -73,6 +73,9 @@ h2 {
   text-transform: uppercase;
   line-height: 38px;
 }
+.text-info {
+    color: $solidblue !important;
+}
 
 //Utility
 .darkBG {
@@ -160,7 +163,7 @@ h2 {
     font-size: 16px;
     text-transform: uppercase;
     filter: blur(0.7px);
-    text-shadow: 1px 1px transparentize(red, 0.3),
+    text-shadow: 1px 1px transparentize(red, 0.7),
       -1px -1px transparentize($deepblue, 0.5),
       0 0 20px transparentize($primary, 0.5);
     &:hover {
@@ -182,15 +185,16 @@ h2 {
     border-bottom: 2px solid !important;
   }
 }
+
 .tab-content {
-  border-style: double;
-  filter: blur(0.4px);
-  border-color: $primary;
-  outline: 1px solid $tertiary;
-  outline-offset: -9px;
-  padding: 20px 20px;
-  max-height: 50vh;
-  overflow-y: scroll;
+    border-style: double;
+    filter: blur(0.4px);
+    border-color: $primary;
+    outline: 1px solid $tertiary;
+    outline-offset: -9px;
+    padding: 20px 20px;
+    max-height: 50vh;
+    overflow-y: scroll;
   .tab-pane {
     table {
       thead {
@@ -200,7 +204,7 @@ h2 {
           font-family: $display-font;
           text-transform: uppercase;
           filter: blur(0.4px);
-          text-shadow: 1px 1px transparentize(red, 0.6),
+          text-shadow: 1px 1px transparentize(red, 0.7),
             -1px -1px transparentize($deepblue, 0.7),
             0 0 20px transparentize($primary, 0.6);
         }
@@ -238,7 +242,7 @@ table {
       color: $tertiary;
       font-family: $display-font;
       filter: blur(0.6px);
-      text-shadow: 1px 1px transparentize(red, 0.6),
+      text-shadow: 1px 1px transparentize(red, 0.7),
         -1px -1px transparentize($deepblue, 0.7),
         0 0 20px transparentize($primary, 0.6);
     }

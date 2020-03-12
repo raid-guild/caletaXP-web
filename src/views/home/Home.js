@@ -14,7 +14,7 @@ const Sword = styled.img`
   width: 150px;
   height: 80px;
   margin: 15px 15px 25px 0px;
-  transform: rotate(-20deg);
+  transform: rotate(-1deg);
 `;
 
 const Home = ({ history }) => {
