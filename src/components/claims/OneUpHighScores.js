@@ -42,7 +42,7 @@ const OneUpHighScores = ({ oneUps, handleNav }) => {
 
   return (
     <>
-      <Table striped bordered hover>
+      <Table striped hover>
         <thead>
           <tr>
             <th>#</th>

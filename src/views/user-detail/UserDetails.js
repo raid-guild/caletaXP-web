@@ -28,8 +28,8 @@ const UserDetail = ({ match }) => {
     <>
       <Row>
         <Col>
-          <h2>@{match.params.username}</h2>
-          <h3>{oneUps.length || 0} Total 1-Ups</h3>
+          <h2 className="username">@{match.params.username}</h2>
+          <h3 className="oneup-count">{oneUps.length || 0} 1-Ups</h3>
         </Col>
         <Col>
           <Button variant="info" disabled={true}>
