@@ -14,12 +14,15 @@ const UserDetail = ({ match }) => {
     if (delay === 300) {
       setLoading(true);
     }
-    const res = await get(`one-up/${match.params.username}`);
 
-    setOneUps(res.data);
-
-    setLoading(false);
-    setDelay(3000);
+    try {
+      const res = await get(`one-up/${match.params.username}`);
+      setOneUps(res.data);
+      setLoading(false);
+      setDelay(10000);
+    } catch {
+      console.log('get err');
+    }
   };
 
   useInterval(fetchData, delay);
