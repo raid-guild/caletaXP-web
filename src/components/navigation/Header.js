@@ -25,7 +25,7 @@ const Header = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className="justify-content-end">
           <Nav>
-            <Link to="/info" className="nav-item">info</Link>
+            <Link to="/info" className="nav-item">about</Link>
             {/* <Link to="/games">Games</Link>
             {currentUser && currentUser.username ? (
               <Link to="/my-page">69 XP</Link>

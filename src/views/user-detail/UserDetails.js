@@ -29,30 +29,34 @@ const UserDetail = ({ match }) => {
 
   return (
     <>
-      <Row>
-        <Col>
-          <h2 className="username">@{match.params.username}</h2>
-          <h3 className="oneup-count">{oneUps.length || 0} 1-Ups</h3>
-        </Col>
-        <Col>
-          <Button variant="info" disabled={true}>
-            Log in with web3
-          </Button>
-          <Button variant="info" disabled={true}>
-            Send to Dao
-          </Button>
-          <p>Coming soon</p>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          {loading ? (
-            <Spinner animation="grow" variant="info" />
-          ) : (
-            <OneUpFeed oneUps={oneUps} handleNav={false} />
-          )}
-        </Col>
-      </Row>
+      <div className="user-details">
+        <Row>
+          <Col>
+            <h2 className="username">@{match.params.username}</h2>
+            <h3 className="oneup-count">{oneUps.length || 0} 1-Ups</h3>
+          </Col>
+          <Col className="button-options">
+            <Button variant="info" disabled={true} className="button-primary">
+              Log in with web3
+            </Button>
+            <Button variant="info" disabled={true} className="button-primary">
+              Send to Dao
+            </Button>
+            <p>Coming soon</p>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            {loading ? (
+              <Spinner animation="grow" variant="info" />
+            ) : (
+              <div className="feed-wrapper">
+                <OneUpFeed oneUps={oneUps} handleNav={false} />
+              </div>
+            )}
+          </Col>
+        </Row>
+      </div>
     </>
   );
 };
