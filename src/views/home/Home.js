@@ -4,31 +4,29 @@ import { Row, Col, Tabs, Tab, Button, Spinner } from 'react-bootstrap';
 
 import OneUpFeed from '../../components/claims/OneUpFeed';
 import OneUpHighScores from '../../components/claims/OneUpHighScores';
-// import { get } from '../../utils/Requests';
-// import { useInterval } from '../../utils/PollingUtil';
-import { HOME_RES } from '../../utils/Data';
+import { get } from '../../utils/Requests';
+import { useInterval } from '../../utils/PollingUtil';
 
 const Home = ({ history }) => {
   const [loading, setLoading] = useState(false);
-  // const [oneUps, setOneUps] = useState([]);
-  const [oneUps, setOneUps] = useState(HOME_RES);
+  const [oneUps, setOneUps] = useState([]);
 
-  // const [delay, setDelay] = useState(300);
+  const [delay, setDelay] = useState(300);
 
-  // const fetchData = async () => {
-  //   if (delay === 300) {
-  //     setLoading(true);
-  //   }
-  //   const res = await get('one-ups');
+  const fetchData = async () => {
+    if (delay === 300) {
+      setLoading(true);
+    }
+    const res = await get('one-ups');
 
-  //   console.log(res.data);
+    console.log(res);
 
-  //   setOneUps(res.data);
-  //   setLoading(false);
-  //   setDelay(3000);
-  // };
+    setOneUps(res.data);
+    setLoading(false);
+    setDelay(3000);
+  };
 
-  // useInterval(fetchData, delay);
+  useInterval(fetchData, delay);
 
   const handleNav = username => {
     const pathName = username.split('@')[1];
