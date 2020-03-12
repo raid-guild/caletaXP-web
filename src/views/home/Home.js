@@ -30,6 +30,7 @@ const Home = ({ history }) => {
 
     try {
       const res = await get('one-ups');
+
       setOneUps(res.data);
       setLoading(false);
       setDelay(10000);

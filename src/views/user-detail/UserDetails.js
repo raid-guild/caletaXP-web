@@ -17,6 +17,7 @@ const UserDetail = ({ match }) => {
 
     try {
       const res = await get(`one-up/${match.params.username}`);
+
       setOneUps(res.data);
       setLoading(false);
       setDelay(10000);
