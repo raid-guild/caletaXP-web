@@ -56,7 +56,6 @@ const UserDetail = ({ match }) => {
               DAO...stay tuned!
             </p>
           </Col>
-          {/* <Col ></Col> */}
         </Row>
         <Row>
           <Col>
@@ -64,7 +63,11 @@ const UserDetail = ({ match }) => {
               <Spinner animation="grow" variant="info" />
             ) : (
               <div className="feed-wrapper">
-                <OneUpFeed oneUps={oneUps} handleNav={false} />
+                <OneUpFeed
+                  oneUps={oneUps}
+                  handleNav={false}
+                  showChatTitle={true}
+                />
               </div>
             )}
           </Col>
