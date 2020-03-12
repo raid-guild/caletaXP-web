@@ -3,11 +3,10 @@ import styled from 'styled-components'
 import { Navbar, Nav, Container } from 'react-bootstrap';
 // import { CurrentUserContext } from '../../contexts/Store';
 import { Link } from 'react-router-dom';
-import LogoSrc from '../../assets/img/logo.png';
+import LogoSrc from '../../assets/img/logo-glow.png';
 
 const Logo = styled.img`
-    width: 320px;
-    height: 65px;
+    width: 40%;
     margin: 15px 15px 15px 0px;
 `;
 
@@ -25,7 +24,7 @@ const Header = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className="justify-content-end">
           <Nav>
-            <Link to="/info" className="nav-item">info</Link>
+            <Link to="/info" className="nav-item">about</Link>
             {/* <Link to="/games">Games</Link>
             {currentUser && currentUser.username ? (
               <Link to="/my-page">69 XP</Link>

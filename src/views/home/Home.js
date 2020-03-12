@@ -8,13 +8,13 @@ import OneUpHighScores from '../../components/claims/OneUpHighScores';
 import { get } from '../../utils/Requests';
 import { useInterval } from '../../utils/PollingUtil';
 
-import SwordSrc from '../../assets/img/sword.png';
+import SwordSrc from '../../assets/img/sword-glow.png';
 
 const Sword = styled.img`
   width: 150px;
   height: 80px;
   margin: 15px 15px 25px 0px;
-  transform: rotate(-20deg);
+  transform: rotate(-1deg);
 `;
 
 const Home = ({ history }) => {
@@ -30,6 +30,7 @@ const Home = ({ history }) => {
 
     try {
       const res = await get('one-ups');
+
       setOneUps(res.data);
       setLoading(false);
       setDelay(10000);
@@ -57,11 +58,13 @@ const Home = ({ history }) => {
             games.
           </h2>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-            feugiat ullamcorper neque nec aliquam. Fusce felis purus, tincidunt
-            at ante id, consequat gravida nisl. Nulla ante leo, hendrerit ut
-            placerat sit amet, imperdiet sed justo. Integer sit amet lectus
-            vestibulum, condimentum sapien at, semper nunc.
+            CaletaXP keeps track of value added activities within your
+            community. Simply connect our Telegram bot (soon Discord), and start
+            playing!
+          </p>
+          <p>
+            Join our community if you would like to contribute, cool mind
+            blowing things are around the corner.
           </p>
 
           <Link to="/info">

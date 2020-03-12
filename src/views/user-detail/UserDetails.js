@@ -17,6 +17,7 @@ const UserDetail = ({ match }) => {
 
     try {
       const res = await get(`one-up/${match.params.username}`);
+
       setOneUps(res.data);
       setLoading(false);
       setDelay(10000);
@@ -30,30 +31,48 @@ const UserDetail = ({ match }) => {
 
   return (
     <>
-      <Row>
-        <Col>
-          <h2 className="username">@{match.params.username}</h2>
-          <h3 className="oneup-count">{oneUps.length || 0} 1-Ups</h3>
-        </Col>
-        <Col>
-          <Button variant="info" disabled={true}>
-            Log in with web3
-          </Button>
-          <Button variant="info" disabled={true}>
-            Send to Dao
-          </Button>
-          <p>Coming soon</p>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          {loading ? (
-            <Spinner animation="grow" variant="info" />
-          ) : (
-            <OneUpFeed oneUps={oneUps} handleNav={false} />
-          )}
-        </Col>
-      </Row>
+      <div className="user-details">
+        <Row>
+          <Col>
+            <h2 className="username">@{match.params.username}</h2>
+            <h3 className="oneup-count">{oneUps.length || 0} 1-Ups</h3>
+            <div className="button-options">
+              <Button variant="info" disabled={true} className="button-primary">
+                Log in with web3
+              </Button>
+              <Button variant="info" disabled={true} className="button-primary">
+                Send to Dao
+              </Button>
+            </div>
+            <p>Coming soon</p>
+          </Col>
+          <Col>
+            <p>
+              These are the points you have accumulated (or points that others
+              have given to you).{' '}
+            </p>
+            <p>
+              You’ll soon be able to submit these transactions to your community
+              DAO...stay tuned!
+            </p>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            {loading ? (
+              <Spinner animation="grow" variant="info" />
+            ) : (
+              <div className="feed-wrapper">
+                <OneUpFeed
+                  oneUps={oneUps}
+                  handleNav={false}
+                  showChatTitle={true}
+                />
+              </div>
+            )}
+          </Col>
+        </Row>
+      </div>
     </>
   );
 };
