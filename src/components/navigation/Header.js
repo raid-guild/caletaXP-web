@@ -1,26 +1,38 @@
 import React from 'react';
-import { Navbar, Nav } from 'react-bootstrap';
+import styled from 'styled-components'
+import { Navbar, Nav, Container } from 'react-bootstrap';
 // import { CurrentUserContext } from '../../contexts/Store';
 import { Link } from 'react-router-dom';
+import LogoSrc from '../../assets/img/logo.png';
+
+const Logo = styled.img`
+    width: 320px;
+    height: 65px;
+    margin: 15px 15px 15px 0px;
+`;
 
 const Header = () => {
   // const [currentUser] = useContext(CurrentUserContext);
 
   return (
-    <Navbar bg="light" expand="lg">
-      <Navbar.Brand>
-        <Link to="/">CaletaXP</Link>
-      </Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse className="justify-content-end">
-        <Nav>
-          <Link to="/info">Info</Link>
-          {/* <Link to="/games">Games</Link>
-          {currentUser && currentUser.username ? (
-            <Link to="/my-page">69 XP</Link>
-          ) : null} */}
-        </Nav>
-      </Navbar.Collapse>
+    <Navbar expand="lg" className="Navbar">
+      <Container>
+        <Navbar.Brand>
+          <Link to="/">
+            <Logo src={LogoSrc} />
+          </Link>
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse className="justify-content-end">
+          <Nav>
+            <Link to="/info" className="nav-item">info</Link>
+            {/* <Link to="/games">Games</Link>
+            {currentUser && currentUser.username ? (
+              <Link to="/my-page">69 XP</Link>
+            ) : null} */}
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
     </Navbar>
   );
 };

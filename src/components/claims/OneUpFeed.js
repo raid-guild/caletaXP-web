@@ -29,7 +29,7 @@ const OneUpFeed = ({ oneUps, handleNav, history }) => {
 
   return (
     <>
-      <Table striped bordered hover>
+      <Table hover>
         <thead>
           <tr>
             <th>Name</th>

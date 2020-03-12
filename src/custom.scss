@@ -1,4 +1,208 @@
 // Override default variables before the import
-$body-bg: #fff;
+$body-bg: #0F0F0F;
+
+
 // Import Bootstrap and its default variables
 @import '~bootstrap/scss/bootstrap.scss';
+
+
+// Google Fonts
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P|Roboto+Mono:400&display=swap');
+$display-font: 'Press Start 2P';
+$base-font: 'Roboto Mono';
+
+
+// Colors
+$primaryBG: #0F0F0F;
+$secondaryBG: #101623;
+
+$primary: #fff;
+$secondary: #6BBBFC;
+$tertiary: #C7BCFE;
+
+$deepblue: #522CFE;
+$solidblue: #2E71FC;
+$midblue: #5188FC;
+
+// Common CSS
+body:before {
+    box-shadow: inset 0 0 6em rgba(50,50,50,0.90);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    content: "";
+   }
+h1,
+h2,
+h3 {
+    font-family: $display-font;
+    color: $primary;
+    filter: blur(.7px);
+    text-shadow: 	1px 1px transparentize(red, .60),
+                    -1px -1px transparentize($deepblue, .70),
+                    0 0 20px transparentize($primary, .50);
+}
+
+
+p {
+    font-family: $base-font;
+    color: $primary;
+    font-size: 18px;
+    line-height: 24px;
+    margin: 25px 0;
+    text-shadow: 	0 0 30px transparentize($primary, .60);
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 20px;
+    text-transform: uppercase;
+    line-height: 38px;
+}
+
+
+//Utility
+.darkBG {
+    background-color: $primaryBG;
+}
+.button-primary {
+    background-color: $solidblue;
+    font-family: $base-font;
+    border-radius: 0;
+    border: none;
+    width: 180px;
+    height: 50px;
+    margin-top: 30px;
+    &:hover {
+        background-color: $deepblue;
+    }
+}
+
+// Nav
+.Navbar {
+    margin-bottom: 80px;
+    .navbar-nav {
+        .nav-item {
+            font-family: $display-font;
+            font-size: 16px;
+            color: $primary;
+            filter: blur(.7px);
+            text-shadow: 	1px 1px transparentize(red, .60),
+                            -1px -1px transparentize($deepblue, .70),
+                            0 0 20px transparentize($primary, .50);
+        }
+    }
+}
+
+// CSS
+.App {
+    height: 100vh;
+    margin: 0 auto;
+}
+.Scoreboard {
+    margin-top: 110px;
+    margin-bottom: 30px;
+    border: 0px;
+    a {
+        font-family: $display-font;
+        color: $primary;
+        padding: 0;
+        padding-bottom: 5px;
+        margin-bottom: 30px;
+        margin-right: 30px;
+        border: 0px !important;
+        font-size: 16px;
+        text-transform: uppercase;
+        text-shadow: 	1px 1px transparentize(red, .30),
+                        -1px -1px transparentize($deepblue, .50),
+                        0 0 20px transparentize($primary, .50);
+    }
+    a.active {
+        color: $primary !important;
+        border-bottom: 2px solid !important;
+    }
+}
+.tab-content {
+    border-style: double;
+    border-color: $primary;
+    outline: 1px solid $tertiary;
+    outline-offset: -9px;
+    padding: 25px;
+    max-height: 50vh;
+    overflow-y: scroll;
+    .tab-pane {
+        table {
+            thead {
+                th {
+                    border  : 0px !important;
+                    color: $tertiary;
+                    font-family: $display-font;
+                    text-transform: uppercase;
+                    text-shadow: 	1px 1px transparentize(red, .60),
+                    -1px -1px transparentize($deepblue, .70),
+                    0 0 20px transparentize($primary, .50);
+                }
+            }
+            tbody {
+                tr {
+                    td {
+                        border: 0px;
+                        font-size: 14px;
+                        color: $primary;
+                        font-family: $display-font;
+                        text-shadow: 	1px 1px transparentize(red, .60),
+                        -1px -1px transparentize($deepblue, .70),
+                        0 0 20px transparentize($primary, .50);
+                    }
+                }
+            }
+        }
+    }
+}
+table {
+    td {
+        border: 0px;
+    }
+    thead {
+        tr {
+            th {
+                border: 0px !important;
+                padding-left: 0 !important;
+            }
+            font-size: 14px;
+            color: $tertiary;
+            font-family: $display-font;
+            text-shadow: 	1px 1px transparentize(red, .60),
+            -1px -1px transparentize($deepblue, .70),
+            0 0 20px transparentize($primary, .50);
+        }
+    }
+    tbody {
+        tr {
+            td {
+                border: 0px !important;
+                padding-left: 0 !important;
+                font-size: 14px;
+                color: $primary;
+                font-family: $display-font;
+                text-shadow: 	1px 1px transparentize(red, .60),
+                -1px -1px transparentize($deepblue, .70),
+                0 0 20px transparentize($primary, .50);
+            }
+        }
+    }
+}
+
+.username {
+    font-size: 28px;
+}
+.oneup-count {
+    font-size: 16px;
+    color: $secondary;
+}

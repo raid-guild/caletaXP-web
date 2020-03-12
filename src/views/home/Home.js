@@ -1,34 +1,42 @@
 import React, { useState } from 'react';
+import styled from 'styled-components'
 import { Link, withRouter } from 'react-router-dom';
 import { Row, Col, Tabs, Tab, Button, Spinner } from 'react-bootstrap';
 
 import OneUpFeed from '../../components/claims/OneUpFeed';
 import OneUpHighScores from '../../components/claims/OneUpHighScores';
-// import { get } from '../../utils/Requests';
-// import { useInterval } from '../../utils/PollingUtil';
-import { HOME_RES } from '../../utils/Data';
+import { get } from '../../utils/Requests';
+import { useInterval } from '../../utils/PollingUtil';
+
+import SwordSrc from '../../assets/img/sword.png';
+
+const Sword = styled.img`
+    width: 150px;
+    height: 80px;
+    margin: 15px 15px 25px 0px;
+    transform: rotate(-20deg);
+`;
 
 const Home = ({ history }) => {
   const [loading, setLoading] = useState(false);
-  // const [oneUps, setOneUps] = useState([]);
-  const [oneUps, setOneUps] = useState(HOME_RES);
+  const [oneUps, setOneUps] = useState([]);
 
-  // const [delay, setDelay] = useState(300);
+  const [delay, setDelay] = useState(300);
 
-  // const fetchData = async () => {
-  //   if (delay === 300) {
-  //     setLoading(true);
-  //   }
-  //   const res = await get('one-ups');
+  const fetchData = async () => {
+    if (delay === 300) {
+      setLoading(true);
+    }
+    const res = await get('one-ups');
 
-  //   console.log(res.data);
+    console.log(res);
 
-  //   setOneUps(res.data);
-  //   setLoading(false);
-  //   setDelay(3000);
-  // };
+    setOneUps(res.data);
+    setLoading(false);
+    setDelay(3000);
+  };
 
-  // useInterval(fetchData, delay);
+  useInterval(fetchData, delay);
 
   const handleNav = username => {
     const pathName = username.split('@')[1];
@@ -37,9 +45,13 @@ const Home = ({ history }) => {
 
   return (
     <>
-      <h2>What is this?</h2>
       <Row>
-        <Col>
+        <Col md='6'>
+        <Sword src={SwordSrc} />
+        <h2>Community tracking <br />
+          for MMO coordination <br />
+          games.
+        </h2>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
             feugiat ullamcorper neque nec aliquam. Fusce felis purus, tincidunt
@@ -49,19 +61,19 @@ const Home = ({ history }) => {
           </p>
 
           <Link to="/info">
-            <Button variant="info">Learn More</Button>
+            <Button variant="info" className="button-primary">Learn More</Button>
           </Link>
         </Col>
-        <Col>
-          <Tabs defaultActiveKey="highScores">
-            <Tab eventKey="highScores" title="High Scores">
+        <Col md='6'>
+          <Tabs defaultActiveKey="highScores" className="Scoreboard">
+            <Tab eventKey="highScores" title="High Scores" className="highscores">
               {loading ? (
                 <Spinner animation="grow" variant="info" />
               ) : (
                 <OneUpHighScores oneUps={oneUps} handleNav={handleNav} />
               )}
             </Tab>
-            <Tab eventKey="feed" title="1-Up Live Feed">
+            <Tab eventKey="feed" title="Recent" className="recentscores">
               {loading ? (
                 <Spinner animation="grow" variant="info" />
               ) : (
