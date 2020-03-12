@@ -38,13 +38,12 @@ const UserDetail = ({ match }) => {
             <h3 className="oneup-count">{oneUps.length || 0} 1-Ups</h3>
             <div className="button-options">
               <Button variant="info" disabled={true} className="button-primary">
-                Log in with web3
+                Web3 Login
               </Button>
               <Button variant="info" disabled={true} className="button-primary">
                 Send to Dao
               </Button>
             </div>
-            <p>Coming soon</p>
           </Col>
           <Col>
             <p>

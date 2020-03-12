@@ -7,7 +7,7 @@ import Header from './components/navigation/Header';
 
 function App() {
   return (
-    <div className="App darkBG">
+    <div className="App">
       <Router>
         <Header />
         <Container>

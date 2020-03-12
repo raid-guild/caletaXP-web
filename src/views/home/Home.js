@@ -50,7 +50,7 @@ const Home = ({ history }) => {
   return (
     <>
       <Row>
-        <Col md="6">
+        <Col md="5">
           <Sword src={SwordSrc} />
           <h2>
             Community tracking <br />
@@ -73,7 +73,7 @@ const Home = ({ history }) => {
             </Button>
           </Link>
         </Col>
-        <Col md="6">
+        <Col md="7">
           <Tabs defaultActiveKey="highScores" className="Scoreboard">
             <Tab
               eventKey="highScores"
