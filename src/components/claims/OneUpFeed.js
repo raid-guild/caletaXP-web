@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import _ from 'lodash';
+import { timeAgo } from '../../utils/Helpers';
 
 const OneUpFeed = ({ oneUps, handleNav, history }) => {
   const [sortedOneUps, setSortedOneUps] = useState([]);
@@ -21,7 +22,7 @@ const OneUpFeed = ({ oneUps, handleNav, history }) => {
         <tr key={oneUp.id} onClick={() => handleNav(oneUp.fields.username)}>
           <td>{oneUp.fields.username}</td>
           <td>{oneUp.fields.sender}</td>
-          <td>{new Date(oneUp.fields.createdAt).toLocaleString()}</td>
+          <td>{timeAgo(oneUp.fields.createdAt)}</td>
         </tr>
       );
     });
