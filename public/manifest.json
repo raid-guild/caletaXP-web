@@ -6,7 +6,7 @@
   "display": "minimal-ui",
   "Scope": "/",
   "start_url": "/",
-  "icons": [
+/*   "icons": [
     {
       "src": "images/icons/icon-72x72.png",
       "sizes": "72x72",
@@ -47,6 +47,6 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
+  ], */
   "splash_pages": null
 }

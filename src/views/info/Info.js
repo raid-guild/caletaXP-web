@@ -1,5 +1,19 @@
 import React from 'react';
+import styled from 'styled-components';
 import { Row, Col } from 'react-bootstrap';
+
+import Weapon1Src from '../../assets/img/weapon1.png';
+import Weapon2Src from '../../assets/img/weapon2.png';
+
+const Weapon1 = styled.img`
+  width: 70%;
+  margin: 20px 0px;
+`;
+
+const Weapon2 = styled.img`
+  width: 70%;
+  margin: 20px 0px;
+`;
 
 const Info = () => {
   return (
@@ -15,13 +29,13 @@ const Info = () => {
             vestibulum, condimentum sapien at, semper nunc.
           </p>
         </Col>
-        <Col>
-          <img src="images/chili.jpg" />
+        <Col className="center-me">
+          <Weapon1 src={Weapon1Src} />
         </Col>
       </Row>
       <Row>
-        <Col>
-          <img src="images/chili.jpg" />
+        <Col className="center-me">
+         <Weapon2 src={Weapon2Src} />
         </Col>
         <Col>
           <p>
@@ -32,6 +46,11 @@ const Info = () => {
             vestibulum, condimentum sapien at, semper nunc.
           </p>
         </Col>
+      </Row>
+      <Row>
+        <h1 className="insert-coin">
+          insert coin
+        </h1>
       </Row>
     </>
   );

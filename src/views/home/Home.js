@@ -8,13 +8,13 @@ import OneUpHighScores from '../../components/claims/OneUpHighScores';
 import { get } from '../../utils/Requests';
 import { useInterval } from '../../utils/PollingUtil';
 
-import SwordSrc from '../../assets/img/sword.png';
+import SwordSrc from '../../assets/img/sword-glow.png';
 
 const Sword = styled.img`
   width: 150px;
   height: 80px;
   margin: 15px 15px 25px 0px;
-  transform: rotate(-20deg);
+  transform: rotate(-1deg);
 `;
 
 const Home = ({ history }) => {
