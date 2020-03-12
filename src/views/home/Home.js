@@ -35,6 +35,7 @@ const Home = ({ history }) => {
       setDelay(10000);
     } catch {
       console.log('get err');
+      setDelay(null);
     }
   };
 

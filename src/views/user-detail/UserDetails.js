@@ -22,6 +22,7 @@ const UserDetail = ({ match }) => {
       setDelay(10000);
     } catch {
       console.log('get err');
+      setDelay(null);
     }
   };
 
