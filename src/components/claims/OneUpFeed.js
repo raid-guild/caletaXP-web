@@ -3,7 +3,7 @@ import { Table } from 'react-bootstrap';
 import _ from 'lodash';
 import { timeAgo } from '../../utils/Helpers';
 
-const OneUpFeed = ({ oneUps, handleNav, history }) => {
+const OneUpFeed = ({ oneUps, handleNav }) => {
   const [sortedOneUps, setSortedOneUps] = useState([]);
 
   useEffect(() => {
@@ -16,10 +16,16 @@ const OneUpFeed = ({ oneUps, handleNav, history }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [oneUps]);
 
+  const handleClick = username => {
+    if (handleNav) {
+      handleNav(username);
+    }
+  };
+
   const renderRows = () => {
     return sortedOneUps.map(oneUp => {
       return (
-        <tr key={oneUp.id} onClick={() => handleNav(oneUp.fields.username)}>
+        <tr key={oneUp.id} onClick={() => handleClick(oneUp.fields.username)}>
           <td>{oneUp.fields.username}</td>
           <td>{oneUp.fields.sender}</td>
           <td>{timeAgo(oneUp.fields.createdAt)}</td>
