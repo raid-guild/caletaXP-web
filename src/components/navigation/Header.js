@@ -3,11 +3,10 @@ import styled from 'styled-components'
 import { Navbar, Nav, Container } from 'react-bootstrap';
 // import { CurrentUserContext } from '../../contexts/Store';
 import { Link } from 'react-router-dom';
-import LogoSrc from '../../assets/img/logo.png';
+import LogoSrc from '../../assets/img/logo-glow.png';
 
 const Logo = styled.img`
-    width: 320px;
-    height: 65px;
+    width: 40%;
     margin: 15px 15px 15px 0px;
 `;
 

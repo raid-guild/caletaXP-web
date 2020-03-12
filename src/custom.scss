@@ -90,10 +90,31 @@ h2 {
     background-color: $deepblue;
   }
 }
+.center-me {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.insert-coin {
+    width: 100%;
+    margin-top: 100px;
+    text-align: center;
+
+    animation:blinkingText 1.2s infinite;
+
+    @keyframes blinkingText{
+        0%{     color: rgb(22, 22, 22); text-shadow: none; filter: blur(15px);   }
+        29%{    color: rgb(15,15,15);  filter: blur(10px); }
+        60%{    color: $primary; text-shadow: none;}
+        100%{    color: $primary; text-shadow: none; filter: blur(1px); }
+
+    }
+}
+
 
 // Nav
 .Navbar {
-  margin-bottom: 80px;
+  margin-bottom: 50px;
   .navbar-nav {
     .nav-item {
       font-family: $display-font;
@@ -192,6 +213,8 @@ h2 {
             line-height: 14px;
             color: $primary;
             font-family: $display-font;
+            overflow-y: hidden;
+            max-width: 100px !important;
             filter: blur(0.4px);
             text-shadow: 1px 1px transparentize(red, 0.6),
               -1px -1px transparentize($deepblue, 0.7),

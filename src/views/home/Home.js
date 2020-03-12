@@ -8,7 +8,7 @@ import OneUpHighScores from '../../components/claims/OneUpHighScores';
 import { get } from '../../utils/Requests';
 import { useInterval } from '../../utils/PollingUtil';
 
-import SwordSrc from '../../assets/img/sword.png';
+import SwordSrc from '../../assets/img/sword-glow.png';
 
 const Sword = styled.img`
   width: 150px;
