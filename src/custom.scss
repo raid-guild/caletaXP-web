@@ -55,6 +55,9 @@ h3 {
   font-family: $display-font;
   color: $primary;
   filter: blur(0.6px);
+  @media (max-width: 768px) {
+    filter: blur(0.3px);
+  }
   text-shadow: 1px 1px transparentize(red, 0.6),
     -1px -1px transparentize($deepblue, 0.7),
     0 0 20px transparentize($primary, 0.5);
@@ -168,8 +171,14 @@ button:focus {
         .nav-item {
         font-family: $display-font;
         font-size: 16px;
+        @media (max-width: 768px) {
+            font-size: 14px;
+          }
         color: $primary;
         filter: blur(0.7px);
+        @media (max-width: 768px) {
+            filter: blur(0.3px);
+          }
         text-decoration: none;
         text-shadow: 1px 1px transparentize(red, 0.6),
             -1px -1px transparentize($deepblue, 0.7),
@@ -210,8 +219,14 @@ button:focus {
     margin-right: 30px;
     border: 0px !important;
     font-size: 16px;
+    @media (max-width: 768px) {
+        font-size: 14px;
+      }
     text-transform: uppercase;
     filter: blur(0.7px);
+    @media (max-width: 768px) {
+        filter: blur(0.3px);
+      }
     text-shadow: 1px 1px transparentize(red, 0.7),
       -1px -1px transparentize($deepblue, 0.5),
       0 0 20px transparentize($primary, 0.5);
@@ -237,7 +252,7 @@ button:focus {
 
 .tab-content {
     border-style: double;
-    filter: blur(0.4px);
+    filter: blur(0.3px);
     border-color: $primary;
     outline: 1px solid $tertiary;
     outline-offset: -9px;
@@ -263,7 +278,7 @@ button:focus {
           color: $secondary;
           font-family: $display-font;
           text-transform: uppercase;
-          filter: blur(0.4px);
+          filter: blur(0.3px);
           text-shadow: 1px 1px transparentize(red, 0.7),
             -1px -1px transparentize($deepblue, 0.7),
             0 0 20px transparentize($primary, 0.6);
@@ -294,7 +309,7 @@ button:focus {
                 overflow: hidden;
                 text-overflow: ellipsis;
                 max-width: 100px !important;
-                filter: blur(0.4px);
+                filter: blur(0.3px);
                 text-shadow: 1px 1px transparentize(red, 0.6),
                 -1px -1px transparentize($deepblue, 0.7),
                 0 0 20px transparentize($primary, 0.6);
@@ -321,6 +336,9 @@ table {
       color: $tertiary;
       font-family: $display-font;
       filter: blur(0.6px);
+      @media (max-width: 768px) {
+        filter: blur(0.3px);
+      }
       text-shadow: 1px 1px transparentize(red, 0.7),
         -1px -1px transparentize($deepblue, 0.7),
         0 0 20px transparentize($primary, 0.6);
@@ -335,6 +353,9 @@ table {
         color: $primary;
         font-family: $display-font;
         filter: blur(0.6px);
+        @media (max-width: 768px) {
+            filter: blur(0.3px);
+          }
         text-shadow: 1px 1px transparentize(red, 0.6),
           -1px -1px transparentize($deepblue, 0.7),
           0 0 20px transparentize($primary, 0.6);
