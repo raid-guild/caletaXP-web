@@ -5,6 +5,7 @@ import { Row, Col } from 'react-bootstrap';
 import Weapon1Src from '../../assets/img/weapon1.png';
 import Weapon2Src from '../../assets/img/weapon2.png';
 import Weapon3Src from '../../assets/img/weapon3.png';
+import Socials from '../../components/shared/Socials';
 
 const Weapon1 = styled.img`
   width: 60%;
@@ -21,7 +22,6 @@ const Weapon3 = styled.img`
   width: 60%;
   margin: 20px 0px;
 `;
-
 
 const Info = () => {
   return (
@@ -50,9 +50,9 @@ const Info = () => {
           <Col>
             <h2>WHAT'S THIS ABOUT</h2>
             <p>
-              CaletaXP aims to become a core piece of infrastructure in our bid to
-              gamify life, by dishing out XP in native chats before people are
-              even aware of web3.
+              CaletaXP aims to become a core piece of infrastructure in our bid
+              to gamify life, by dishing out XP in native chats before people
+              are even aware of web3.
             </p>
             <p>
               {' '}
@@ -66,9 +66,10 @@ const Info = () => {
           <Col>
             <h2>COME EAT SOME DOG FOOD.</h2>
             <p>
-              Lots left to do, come join the party as we move past prototype, and
-              into the game.
+              Lots left to do, come join the party as we move past prototype,
+              and into the game.
             </p>
+            <Socials />
           </Col>
           <Col className="center-me">
             <Weapon3 src={Weapon3Src} />

@@ -9,6 +9,7 @@ import { get } from '../../utils/Requests';
 import { useInterval } from '../../utils/PollingUtil';
 
 import SwordSrc from '../../assets/img/sword-glow.png';
+import Socials from '../../components/shared/Socials';
 
 const Sword = styled.img`
   width: 150px;
@@ -72,6 +73,9 @@ const Home = ({ history }) => {
               Learn More
             </Button>
           </Link>
+          <div className="home-socials">
+            <Socials />
+          </div>
         </Col>
         <Col md="7">
           <Tabs defaultActiveKey="highScores" className="Scoreboard">
