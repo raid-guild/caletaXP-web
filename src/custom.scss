@@ -29,9 +29,9 @@ body:before {
   top: 0;
   left: 0;
   width: 100%;
-  height: 150vh;
+  height: 200vh;
   z-index: 0;
-  background-attachment: local;
+  overflow: hidden;
   background: repeating-linear-gradient(
     0deg,
     rgba(black, 1),
@@ -43,6 +43,11 @@ body:before {
 }
 body:after {
   content: '';
+}
+.container {
+    @media (max-width: 576px) {
+        padding: 0 30px;
+    }
 }
 h1,
 h2,
@@ -76,6 +81,9 @@ h2 {
 .text-info {
   color: $solidblue !important;
 }
+button:focus {
+    outline: none;
+}
 
 //Utility
 .darkBG {
@@ -97,6 +105,9 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (max-width: 768px) {
+      justify-content: left;
+  }
 }
 .insert-coin {
   width: 100%;
@@ -130,15 +141,29 @@ h2 {
 // Nav
 .Navbar {
     margin-bottom: 20px;
+    .container {
+        flex-wrap: nowrap;
+        .navbar-collapse {
+            @media (max-width: 991px) {
+                flex-basis: auto;
+            }
+        }
+    }
     @media (min-width: 576px) {
         margin-top: 80px;
     }
-    .navbar-toggler {
-        border: none;
-        .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='83.6967' height='60.66225' viewBox='0 0 83.6967 60.66225'%3E%3Ctitle%3Emenu-icon%3C/title%3E%3Crect x='19.504' y='13.77819' width='41.99726' height='7.03038' style='fill: %23fff'/%3E%3Crect x='19.504' y='26.81593' width='41.99726' height='7.03038' style='fill: %23fff'/%3E%3Crect x='19.504' y='38.93954' width='41.99726' height='7.03038' style='fill: %23fff'/%3E%3C/svg%3E");
+    @media (max-width: 991px) {
+        .navbar-toggler {
+            border: none;
+            align-self: center;
+            display: flex;
+            justify-content: center;
+            .navbar-toggler-icon {
+                background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='83.6967' height='60.66225' viewBox='0 0 83.6967 60.66225'%3E%3Ctitle%3Emenu-icon%3C/title%3E%3Crect x='19.504' y='13.77819' width='41.99726' height='7.03038' style='fill: %23fff'/%3E%3Crect x='19.504' y='26.81593' width='41.99726' height='7.03038' style='fill: %23fff'/%3E%3Crect x='19.504' y='38.93954' width='41.99726' height='7.03038' style='fill: %23fff'/%3E%3C/svg%3E");
+            }
         }
     }
+
     .navbar-nav {
         .nav-item {
         font-family: $display-font;
@@ -170,7 +195,10 @@ h2 {
   margin: 0 auto;
 }
 .Scoreboard {
-  margin-top: 110px;
+  margin-top: 70px;
+  @media (min-width: 576px) {
+    margin-top: 110px;
+  }
   margin-bottom: 30px;
   border: 0px;
   a {
@@ -239,29 +267,47 @@ h2 {
           text-shadow: 1px 1px transparentize(red, 0.7),
             -1px -1px transparentize($deepblue, 0.7),
             0 0 20px transparentize($primary, 0.6);
+            @media (max-width: 576px) {
+                font-size: 12px;
+            }
         }
       }
       tbody {
         tr {
-          td {
-            border: 0px;
-            font-size: 14px;
-            line-height: 14px;
-            color: $primary;
-            font-family: $display-font;
-            overflow-y: hidden;
-            text-overflow: ellipsis;
-            max-width: 100px !important;
-            filter: blur(0.4px);
-            text-shadow: 1px 1px transparentize(red, 0.6),
-              -1px -1px transparentize($deepblue, 0.7),
-              0 0 20px transparentize($primary, 0.6);
-          }
+            &:hover {
+                background-color: $midblue !important;
+                cursor: pointer;
+                background: repeating-linear-gradient(
+                  0deg,
+                  rgba(black, 0.7),
+                  rgba(black, 0.7) 1px,
+                  transparent 1px,
+                  transparent 2px
+                );
+              }
+            td {
+                border: 0px;
+                font-size: 14px;
+                line-height: 14px;
+                color: $primary;
+                font-family: $display-font;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 100px !important;
+                filter: blur(0.4px);
+                text-shadow: 1px 1px transparentize(red, 0.6),
+                -1px -1px transparentize($deepblue, 0.7),
+                0 0 20px transparentize($primary, 0.6);
+                @media (max-width: 576px) {
+                    font-size: 10px;
+                }
+            }
         }
       }
     }
   }
 }
+
 table {
   td {
     border: 0px;
@@ -293,26 +339,55 @@ table {
           -1px -1px transparentize($deepblue, 0.7),
           0 0 20px transparentize($primary, 0.6);
       }
-      &:hover {
-        background-color: $midblue !important;
-        cursor: pointer;
-        background: repeating-linear-gradient(
-          0deg,
-          rgba(black, 0.7),
-          rgba(black, 0.7) 1px,
-          transparent 1px,
-          transparent 2px
-        );
-      }
     }
   }
 }
 
 .user-details {
+  .row {
+      .col {
+          &:nth-child(2){
+            @media (max-width: 768px) {
+                flex-basis: unset;
+            }
+          }
+      }
+  }
   .feed-wrapper {
     max-height: 55vh !important;
     overflow-y: scroll;
     margin-top: 20px;
+        table {
+            tbody, thead {
+                tr {
+                    @media (max-width: 576px) {
+                        font-size: 10px;
+                    }
+                    td {
+                        @media (max-width: 768px) {
+                            font-size: 10px;
+                            max-width: 300px;
+                        }
+                        &:nth-child(1) {
+                            max-width: 300px;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            @media (max-width: 576px) {
+                                max-width: 100px;
+                            }
+                        }
+                        &:nth-child(4) {
+                            max-width: 200px;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            @media (max-width: 576px) {
+                                max-width: 100px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
   }
   .username {
     font-size: 28px;
@@ -348,6 +423,14 @@ table {
 }
 
 .info {
+    .row {
+        @media (max-width: 768px) {
+            flex-direction: column-reverse;
+            &:nth-child(2) {
+                flex-direction: column;
+            }
+        }
+    }
     p {
         width: 85%;
     }

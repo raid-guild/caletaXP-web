@@ -8,6 +8,9 @@ import LogoSrc from '../../assets/img/logo-glow.png';
 const Logo = styled.img`
     width: 40%;
     margin: 15px 15px 15px 0px;
+    @media (max-width: 768px) {
+      width: 60%;
+    }
 `;
 
 const Header = () => {
