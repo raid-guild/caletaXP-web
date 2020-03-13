@@ -54,10 +54,6 @@ h2,
 h3 {
   font-family: $display-font;
   color: $primary;
-  filter: blur(0.6px);
-  @media (max-width: 768px) {
-    filter: blur(0.3px);
-  }
   text-shadow: 1px 1px transparentize(red, 0.6),
     -1px -1px transparentize($deepblue, 0.7),
     0 0 20px transparentize($primary, 0.5);
@@ -87,6 +83,11 @@ h2 {
 button:focus {
   outline: none;
 }
+a:active, a:focus {
+    outline: 0;
+    border: none;
+    -moz-outline-style: none;
+  }
 
 //Utility
 .darkBG {
@@ -175,10 +176,6 @@ button:focus {
         font-size: 14px;
       }
       color: $primary;
-      filter: blur(0.7px);
-      @media (max-width: 768px) {
-        filter: blur(0.3px);
-      }
       text-decoration: none;
       text-shadow: 1px 1px transparentize(red, 0.6),
         -1px -1px transparentize($deepblue, 0.7),
@@ -223,10 +220,6 @@ button:focus {
       font-size: 14px;
     }
     text-transform: uppercase;
-    filter: blur(0.7px);
-    @media (max-width: 768px) {
-      filter: blur(0.3px);
-    }
     text-shadow: 1px 1px transparentize(red, 0.7),
       -1px -1px transparentize($deepblue, 0.5),
       0 0 20px transparentize($primary, 0.5);
@@ -252,7 +245,6 @@ button:focus {
 
 .tab-content {
   border-style: double;
-  filter: blur(0.3px);
   border-color: $primary;
   outline: 1px solid $tertiary;
   outline-offset: -9px;
@@ -262,11 +254,20 @@ button:focus {
   .tab-pane {
     &.highscores {
       table {
-        thead {
-          th {
+        thead, tbody {
+          th, td {
             &:nth-child(1) {
               width: 40px;
+              @media (max-width: 768px) {
+                  width: 25px;
+              }
             }
+            &:nth-child(3) {
+                width: 100px;
+                @media (max-width: 768px) {
+                    width: 50px;
+                }
+              }
           }
         }
       }
@@ -278,7 +279,6 @@ button:focus {
           color: $secondary;
           font-family: $display-font;
           text-transform: uppercase;
-          filter: blur(0.3px);
           text-shadow: 1px 1px transparentize(red, 0.7),
             -1px -1px transparentize($deepblue, 0.7),
             0 0 20px transparentize($primary, 0.6);
@@ -309,7 +309,6 @@ button:focus {
             overflow: hidden;
             text-overflow: ellipsis;
             max-width: 100px !important;
-            filter: blur(0.3px);
             text-shadow: 1px 1px transparentize(red, 0.6),
               -1px -1px transparentize($deepblue, 0.7),
               0 0 20px transparentize($primary, 0.6);
@@ -335,10 +334,6 @@ table {
       font-size: 14px;
       color: $tertiary;
       font-family: $display-font;
-      filter: blur(0.6px);
-      @media (max-width: 768px) {
-        filter: blur(0.3px);
-      }
       text-shadow: 1px 1px transparentize(red, 0.7),
         -1px -1px transparentize($deepblue, 0.7),
         0 0 20px transparentize($primary, 0.6);
@@ -352,10 +347,6 @@ table {
         line-height: 14px;
         color: $primary;
         font-family: $display-font;
-        filter: blur(0.6px);
-        @media (max-width: 768px) {
-          filter: blur(0.3px);
-        }
         text-shadow: 1px 1px transparentize(red, 0.6),
           -1px -1px transparentize($deepblue, 0.7),
           0 0 20px transparentize($primary, 0.6);
@@ -413,6 +404,9 @@ table {
   }
   .username {
     font-size: 28px;
+    @media (max-width: 768px) {
+        font-size: 22px;
+    }
     max-width: 400px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -422,7 +416,6 @@ table {
     color: $secondary;
   }
   .button-options {
-    // text-align: right;
     .button-primary,
     p {
       margin-right: 20px;
@@ -432,6 +425,7 @@ table {
       margin-bottom: 10px;
     }
     .button-primary {
+      width: 9em;
       margin-top: 10px;
       margin-bottom: 10px;
     }
@@ -451,6 +445,9 @@ table {
       &:nth-child(2) {
         flex-direction: column;
       }
+    }
+    .col {
+        margin-top: 60px;
     }
   }
   p {
