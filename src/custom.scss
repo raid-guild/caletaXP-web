@@ -25,7 +25,7 @@ $midblue: #5188fc;
 // Common CSS
 body:before {
   box-shadow: inset 0 0 8em rgba(25, 25, 25, 0.97);
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -39,9 +39,6 @@ body:before {
     transparent 1px,
     transparent 2px
   );
-  content: '';
-}
-body:after {
   content: '';
 }
 .container {
