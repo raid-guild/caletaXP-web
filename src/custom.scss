@@ -25,7 +25,7 @@ $midblue: #5188fc;
 // Common CSS
 body:before {
   box-shadow: inset 0 0 8em rgba(25, 25, 25, 0.97);
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -39,9 +39,6 @@ body:before {
     transparent 1px,
     transparent 2px
   );
-  content: '';
-}
-body:after {
   content: '';
 }
 .container {
@@ -154,7 +151,7 @@ a:active, a:focus {
     }
   }
   @media (min-width: 576px) {
-    margin-top: 80px;
+    margin-top: 20px;
   }
   @media (max-width: 991px) {
     .navbar-toggler {
@@ -200,11 +197,16 @@ a:active, a:focus {
   height: 100vh;
   margin: 0 auto;
 }
+.home {
+    .insert-coin {
+        margin: 60px 0;
+    }
+}
 .Scoreboard {
   margin-top: 70px;
-  @media (min-width: 576px) {
+/*   @media (min-width: 576px) {
     margin-top: 110px;
-  }
+  } */
   margin-bottom: 30px;
   border: 0px;
   a {

@@ -50,56 +50,61 @@ const Home = ({ history }) => {
 
   return (
     <>
-      <Row>
-        <Col md="5">
-          <Sword src={SwordSrc} />
-          <h2>
-            Community tracking <br />
-            for MMO coordination <br />
-            games.
-          </h2>
-          <p>
-            CaletaXP keeps track of value added activities within your
-            community. Simply connect our Telegram bot (soon Discord), and start
-            playing!
-          </p>
-          <p>
-            Join our community if you would like to contribute, cool mind
-            blowing things are around the corner.
-          </p>
+      <div className="home">
+        <Row>
+          <Col md="5">
+            <Sword src={SwordSrc} />
+            <h2>
+              Community tracking <br />
+              for MMO coordination <br />
+              games.
+            </h2>
+            <p>
+              CaletaXP keeps track of value added activities within your
+              community. Simply connect our Telegram bot (soon Discord), and start
+              playing!
+            </p>
+            <p>
+              Join our community if you would like to contribute, cool mind
+              blowing things are around the corner.
+            </p>
 
-          <Link to="/info">
-            <Button variant="info" className="button-primary">
-              Learn More
-            </Button>
-          </Link>
-          <div className="home-socials">
-            <Socials />
-          </div>
-        </Col>
-        <Col md="7">
-          <Tabs defaultActiveKey="highScores" className="Scoreboard">
-            <Tab
-              eventKey="highScores"
-              title="High Scores"
-              className="highscores"
-            >
-              {loading ? (
-                <Spinner animation="grow" variant="info" />
-              ) : (
-                <OneUpHighScores oneUps={oneUps} handleNav={handleNav} />
-              )}
-            </Tab>
-            <Tab eventKey="feed" title="Recent" className="recentscores">
-              {loading ? (
-                <Spinner animation="grow" variant="info" />
-              ) : (
-                <OneUpFeed oneUps={oneUps} handleNav={handleNav} />
-              )}
-            </Tab>
-          </Tabs>
-        </Col>
-      </Row>
+            <Link to="/info">
+              <Button variant="info" className="button-primary">
+                Learn More
+              </Button>
+            </Link>
+            <div className="home-socials">
+              <Socials />
+            </div>
+          </Col>
+          <Col md="7">
+            <Tabs defaultActiveKey="highScores" className="Scoreboard">
+              <Tab
+                eventKey="highScores"
+                title="High Scores"
+                className="highscores"
+              >
+                {loading ? (
+                  <Spinner animation="grow" variant="info" />
+                ) : (
+                  <OneUpHighScores oneUps={oneUps} handleNav={handleNav} />
+                )}
+              </Tab>
+              <Tab eventKey="feed" title="Recent" className="recentscores">
+                {loading ? (
+                  <Spinner animation="grow" variant="info" />
+                ) : (
+                  <OneUpFeed oneUps={oneUps} handleNav={handleNav} />
+                )}
+              </Tab>
+            </Tabs>
+          </Col>
+        </Row>
+        <Row>
+          <h1 className="insert-coin">insert coin</h1>
+        </Row>
+      </div>
     </>
   );
 };
