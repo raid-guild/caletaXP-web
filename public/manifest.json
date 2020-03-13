@@ -1,12 +1,10 @@
 {
-  "name": "CaletaXP",
-  "short_name": "CaletaXP",
-  "theme_color": "#bd86fe",
-  "background_color": "#ef497b",
-  "display": "minimal-ui",
+  "theme_color": "#6bbbfc",
+  "background_color": "#000000",
+  "display": "browser",
   "Scope": "/",
   "start_url": "/",
-/*   "icons": [
+  "icons": [
     {
       "src": "images/icons/icon-72x72.png",
       "sizes": "72x72",
@@ -47,6 +45,6 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ], */
+  ],
   "splash_pages": null
 }
