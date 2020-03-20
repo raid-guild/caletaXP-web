@@ -8,15 +8,8 @@ import OneUpHighScores from '../../components/claims/OneUpHighScores';
 import { get } from '../../utils/Requests';
 import { useInterval } from '../../utils/PollingUtil';
 
-import SwordSrc from '../../assets/img/sword-glow.png';
 import Socials from '../../components/shared/Socials';
 
-const Sword = styled.img`
-  width: 150px;
-  height: 80px;
-  margin: 15px 15px 25px 0px;
-  transform: rotate(-1deg);
-`;
 
 const Home = ({ history }) => {
   const [loading, setLoading] = useState(false);
@@ -53,8 +46,7 @@ const Home = ({ history }) => {
       <div className="home">
         <Row>
           <Col md="5">
-            <Sword src={SwordSrc} />
-            <h2>
+            <h2 className="hero-title">
               Community tracking <br />
               for MMO coordination <br />
               games.
