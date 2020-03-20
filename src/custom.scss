@@ -198,6 +198,12 @@ a:active, a:focus {
   margin: 0 auto;
 }
 .home {
+    .hero-title {
+        margin-top: 40px;
+        @media (max-width: 576px) {
+            margin-top: 0px;
+          }
+    }
     .insert-coin {
         margin: 60px 0;
     }
