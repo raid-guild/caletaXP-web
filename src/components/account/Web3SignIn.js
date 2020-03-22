@@ -10,7 +10,8 @@ export const Web3SignIn = () => {
 
   return (
     <Button
-      variant="outline-primary"
+      variant="info"
+      className="button-primary"
       onClick={async () => {
         try {
           const w3c = await w3connect(web3Connect);
@@ -23,7 +24,7 @@ export const Web3SignIn = () => {
         }
       }}
     >
-      Sign In With Web3
+      Web3 Login
     </Button>
   );
 };

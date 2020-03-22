@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Row, Col, Spinner, Button } from 'react-bootstrap';
+
+import Box from '3box';
 
 import OneUpFeed from '../../components/claims/OneUpFeed';
 import { get } from '../../utils/Requests';
 import { useInterval } from '../../utils/PollingUtil';
+import { Web3SignIn } from '../../components/account/Web3SignIn';
+import { CurrentUserContext } from '../../contexts/Store';
 
 const UserDetail = ({ match }) => {
   const [loading, setLoading] = useState(false);
   const [oneUps, setOneUps] = useState([]);
+  const [userDetail, setUserDetail] = useState();
+  const [user3BoxDetail, setUser3BoxDetail] = useState();
+  const [currentWeb3User, setCurrentUser] = useContext(CurrentUserContext);
 
   const [delay, setDelay] = useState(300);
   const fetchData = async () => {
@@ -17,7 +24,6 @@ const UserDetail = ({ match }) => {
 
     try {
       const res = await get(`one-up/${match.params.username}`);
-
       setOneUps(res.data);
       setLoading(false);
       setDelay(10000);
@@ -28,6 +34,32 @@ const UserDetail = ({ match }) => {
   };
 
   useInterval(fetchData, delay);
+
+  useEffect(() => {
+    const get3BoxProfile = async () => {
+      const profile = await Box.getProfile(userDetail.ethAddress)
+      console.log(profile);
+
+      setUser3BoxDetail(profile)
+    }
+    if (userDetail && userDetail.ethAddress) {
+      get3BoxProfile()
+    }
+  }, [userDetail])
+
+  useEffect(() => {
+    const get1upProfile = async () => {
+      const res = await get(`username/${match.params.username}`);
+      if (res.data[0]) {
+        setUserDetail(res.data[0].fields)
+        console.log(res.data[0].fields);
+
+      }
+    }
+    if (match.params.username) {
+      get1upProfile()
+    }
+  }, [match])
 
   const submitToDAO = (oneUps) => {
     const daoHost = "https://alchemy.daostack.io"
@@ -48,15 +80,25 @@ const UserDetail = ({ match }) => {
       <div className="user-details">
         <Row>
           <Col>
-            <h2 className="username">@{match.params.username}</h2>
+            <h2 className="username">{(userDetail && userDetail.username) || '@' + match.params.username}</h2>
             <h3 className="oneup-count">{oneUps.length || 0} 1-Ups</h3>
+            {user3BoxDetail && (<p>{user3BoxDetail.emoji}</p>)}
             <div className="button-options">
-              <Button variant="info" disabled={true} className="button-primary">
-                Web3 Login
-              </Button>
-              <Button onClick={() => submitToDAO(oneUps)} variant="info" className="button-primary">
-                Send to Dao
-              </Button>
+              {currentWeb3User && currentWeb3User.username && userDetail && userDetail.ethAddress === currentWeb3User.username && (
+                <Button onClick={() => submitToDAO(oneUps)} variant="info" className="button-primary">
+                  Send to Dao
+                </Button>
+              )}
+              {currentWeb3User && currentWeb3User.username ?
+                (<>
+                  {!userDetail && (<Button href='https://t.me/oneupworld_bot' variant="info" className="button-primary">
+                    Claim Your Username
+                </Button>)
+                  }
+                </>)
+                : (
+                  <Web3SignIn setCurrentUser={setCurrentUser} />
+                )}
             </div>
           </Col>
           <Col>
