@@ -5,7 +5,7 @@ const Socials = () => {
     <div className="social-links">
       <a
         className="nav-item"
-        href="https://twitter.com/caletaxp"
+        href="https://twitter.com/1up_world"
         rel="noopener noreferrer"
         target="_blank"
       >
@@ -18,6 +18,14 @@ const Socials = () => {
         target="_blank"
       >
         Telegram
+      </a>
+      <a
+        className="nav-item"
+        href="https://gitcoin.co/grants/546/1up-world"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Contribute to our Gitcoin Grant
       </a>
     </div>
   );
