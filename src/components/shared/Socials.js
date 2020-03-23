@@ -5,7 +5,7 @@ const Socials = () => {
     <div className="social-links">
       <a
         className="nav-item"
-        href="https://twitter.com/caletaxp"
+        href="https://twitter.com/1up_world"
         rel="noopener noreferrer"
         target="_blank"
       >

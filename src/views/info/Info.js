@@ -50,14 +50,14 @@ const Info = () => {
           <Col>
             <h2>WHAT'S THIS ABOUT</h2>
             <p>
-              CaletaXP aims to become a core piece of infrastructure in our bid
-              to gamify life, by dishing out XP in native chats before people
-              are even aware of web3.
+              1up aims to become a core piece of infrastructure in our bid to
+              gamify life, by dishing out XP in native chats before people are
+              even aware of web3.
             </p>
             <p>
               {' '}
-              Start by adding the Telegram bot (caletaXP bot) to your chat. The
-              only two commands we support at this stage are: /help and /1up
+              Start by adding the Telegram bot (@oneuporld_bot) to your chat.
+              The only two commands we support at this stage are: /help and /1up
               @username to dish out points.
             </p>
           </Col>

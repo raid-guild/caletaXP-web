@@ -1,4 +1,6 @@
 {
+  "name": "1up World",
+  "short_name": "1up",
   "theme_color": "#6bbbfc",
   "background_color": "#000000",
   "display": "browser",
