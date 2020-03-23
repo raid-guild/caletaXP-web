@@ -9,6 +9,7 @@ import { useInterval } from '../../utils/PollingUtil';
 import { Web3SignIn } from '../../components/account/Web3SignIn';
 import { CurrentUserContext } from '../../contexts/Store';
 import SubmitToDao from '../../components/submissions/SubmitToDao';
+import { addOneUpStatus } from '../../utils/Helpers';
 
 const UserDetail = ({ match }) => {
   const [loading, setLoading] = useState(false);
@@ -25,7 +26,10 @@ const UserDetail = ({ match }) => {
 
     try {
       const res = await get(`one-up/${match.params.username}`);
-      setOneUps(res.data);
+
+      // TODO: hydrate oneups with a status
+
+      setOneUps(res.data.map(oneUp => addOneUpStatus(oneUp)));
       setLoading(false);
       setDelay(10000);
     } catch {
@@ -120,7 +124,7 @@ const UserDetail = ({ match }) => {
                 <OneUpFeed
                   oneUps={oneUps}
                   handleNav={false}
-                  showChatTitle={true}
+                  isUserDetail={true}
                 />
               </div>
             )}
