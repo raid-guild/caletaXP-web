@@ -27,6 +27,8 @@ const SubmitToDao = ({ oneUps, user }) => {
         daoName: daoData.name,
         daoAddress: daoData.address,
         ups: ids,
+        username: `@${user.username}`,
+        ethAddress: user.ethAddress,
       });
     }
 
@@ -34,6 +36,7 @@ const SubmitToDao = ({ oneUps, user }) => {
   }, [oneUps]);
 
   const handleSubmit = async oneUps => {
+    // TODO: Error handle the post
     const res = await post('submission/new', submission);
     setSubmitted(true);
 

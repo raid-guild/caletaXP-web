@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Row, Col, Spinner, Button } from 'react-bootstrap';
+import { Row, Col, Spinner, Button, Tabs, Tab } from 'react-bootstrap';
 
 import Box from '3box';
 
@@ -10,10 +10,12 @@ import { Web3SignIn } from '../../components/account/Web3SignIn';
 import { CurrentUserContext } from '../../contexts/Store';
 import SubmitToDao from '../../components/submissions/SubmitToDao';
 import { addOneUpStatus } from '../../utils/Helpers';
+import SubmissionList from '../../components/submissions/SubmissionList';
 
 const UserDetail = ({ match }) => {
   const [loading, setLoading] = useState(false);
   const [oneUps, setOneUps] = useState([]);
+  const [submissions, setSubmissions] = useState([]);
   const [userDetail, setUserDetail] = useState();
   const [user3BoxDetail, setUser3BoxDetail] = useState();
   const [currentWeb3User, setCurrentUser] = useContext(CurrentUserContext);
@@ -26,8 +28,12 @@ const UserDetail = ({ match }) => {
 
     try {
       const res = await get(`one-up/${match.params.username}`);
+      const submissionRes = await get(
+        `submissions/username/${match.params.username}`,
+      );
 
       setOneUps(res.data.map(oneUp => addOneUpStatus(oneUp)));
+      setSubmissions(submissionRes.data);
       setLoading(false);
       setDelay(10000);
     } catch {
@@ -113,18 +119,36 @@ const UserDetail = ({ match }) => {
             </p>
           </Col>
         </Row>
+
         <Row>
           <Col>
             {loading ? (
               <Spinner animation="grow" variant="info" />
             ) : (
-              <div className="feed-wrapper">
-                <OneUpFeed
-                  oneUps={oneUps}
-                  handleNav={false}
-                  isUserDetail={true}
-                />
-              </div>
+              <Tabs defaultActiveKey="oneUps" className="Scoreboard">
+                <Tab eventKey="oneUps" title="All 1Ups" className="oneUps">
+                  {loading ? (
+                    <Spinner animation="grow" variant="info" />
+                  ) : (
+                    <OneUpFeed
+                      oneUps={oneUps}
+                      handleNav={false}
+                      isUserDetail={true}
+                    />
+                  )}
+                </Tab>
+                <Tab
+                  eventKey="feed"
+                  title="Submissions"
+                  className="submissions"
+                >
+                  {loading ? (
+                    <Spinner animation="grow" variant="info" />
+                  ) : (
+                    <SubmissionList submissions={submissions} />
+                  )}
+                </Tab>
+              </Tabs>
             )}
           </Col>
         </Row>
