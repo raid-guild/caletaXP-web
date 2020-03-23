@@ -93,7 +93,7 @@
   export const createWeb3User = (accountAddress) => {
     return {
       type: 'web3',
-      attributes: { 'custom:account_address': accountAddress },
-      username: accountAddress,
+      attributes: { 'custom:account_address': accountAddress.toLowerCase() },
+      username: accountAddress.toLowerCase(),
     };
   };
