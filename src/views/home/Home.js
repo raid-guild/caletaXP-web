@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { Link, withRouter } from 'react-router-dom';
 import { Row, Col, Tabs, Tab, Button, Spinner } from 'react-bootstrap';
 
@@ -9,7 +8,6 @@ import { get } from '../../utils/Requests';
 import { useInterval } from '../../utils/PollingUtil';
 
 import Socials from '../../components/shared/Socials';
-
 
 const Home = ({ history }) => {
   const [loading, setLoading] = useState(false);
@@ -52,9 +50,8 @@ const Home = ({ history }) => {
               games.
             </h2>
             <p>
-              CaletaXP keeps track of value added activities within your
-              community. Simply connect our Telegram bot (soon Discord), and start
-              playing!
+              1up keeps track of value added activities within your community.
+              Simply connect our Telegram bot (soon Discord), and start playing!
             </p>
             <p>
               Join our community if you would like to contribute, cool mind

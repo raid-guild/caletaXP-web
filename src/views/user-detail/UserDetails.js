@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Row, Col, Spinner, Button } from 'react-bootstrap';
+import { Row, Col, Spinner, Button, Tabs, Tab } from 'react-bootstrap';
 
 import Box from '3box';
 
@@ -8,10 +8,14 @@ import { get } from '../../utils/Requests';
 import { useInterval } from '../../utils/PollingUtil';
 import { Web3SignIn } from '../../components/account/Web3SignIn';
 import { CurrentUserContext } from '../../contexts/Store';
+import SubmitToDao from '../../components/submissions/SubmitToDao';
+import { addOneUpStatus } from '../../utils/Helpers';
+import SubmissionList from '../../components/submissions/SubmissionList';
 
-const UserDetail = ({ match }) => {
+const UserDetail = ({ match, history }) => {
   const [loading, setLoading] = useState(false);
   const [oneUps, setOneUps] = useState([]);
+  const [submissions, setSubmissions] = useState([]);
   const [userDetail, setUserDetail] = useState();
   const [user3BoxDetail, setUser3BoxDetail] = useState();
   const [currentWeb3User, setCurrentUser] = useContext(CurrentUserContext);
@@ -24,7 +28,12 @@ const UserDetail = ({ match }) => {
 
     try {
       const res = await get(`one-up/${match.params.username}`);
-      setOneUps(res.data);
+      const submissionRes = await get(
+        `submissions/username/${match.params.username}`,
+      );
+
+      setOneUps(res.data.map(oneUp => addOneUpStatus(oneUp)));
+      setSubmissions(submissionRes.data);
       setLoading(false);
       setDelay(10000);
     } catch {
@@ -37,68 +46,72 @@ const UserDetail = ({ match }) => {
 
   useEffect(() => {
     const get3BoxProfile = async () => {
-      const profile = await Box.getProfile(userDetail.ethAddress)
-      console.log(profile);
+      const profile = await Box.getProfile(userDetail.ethAddress);
 
-      setUser3BoxDetail(profile)
-    }
+      setUser3BoxDetail(profile);
+    };
     if (userDetail && userDetail.ethAddress) {
-      get3BoxProfile()
+      get3BoxProfile();
     }
-  }, [userDetail])
+  }, [userDetail]);
 
   useEffect(() => {
     const get1upProfile = async () => {
       const res = await get(`username/${match.params.username}`);
       if (res.data[0]) {
-        setUserDetail(res.data[0].fields)
-        console.log(res.data[0].fields);
-
+        setUserDetail(res.data[0].fields);
       }
-    }
+    };
     if (match.params.username) {
-      get1upProfile()
+      get1upProfile();
     }
-  }, [match])
+  }, [match]);
 
-  const submitToDAO = (oneUps) => {
-    const daoHost = "https://alchemy.daostack.io"
-    const daoRoute = "/dao/0xafdd1eb2511cd891acf2bff82dabf47e0c914d24/scheme/0x6da49c4e88ae95c4faaa9c2133b1fa7190b763cebc3d62332b1b07c859311221/proposals/create/";
-    const beneficiary = `beneficiary=${'0x123'}`;
-    const description = `&description=http://1up.world/user-detail/${'username'}`;
-    const profileUrl = `&url=http://1up.world/user-detail/${'username'}`;
-    const tokenInfo = `&ethReward=0&externalTokenAddress=0x543ff227f64aa17ea132bf9886cab5db55dcaddf&externalTokenReward=0`;
-    const rewards = `&nativeTokenReward=${oneUps.length}&reputationReward=${oneUps.length}`
-    const title = `&title=Submission 1 for ${'@username'}&url=&tags=[]`
-    const url = `${daoHost}${daoRoute}?${beneficiary}${description}${profileUrl}${tokenInfo}${rewards}${title}`
-    const encodedUrl = encodeURI(url);
-    window.open(encodedUrl, "_blank")
-  }
+  const handleNav = submissionId => {
+    history.push(
+      `/user-detail/${match.params.username}/submission/${submissionId}`,
+    );
+  };
 
   return (
     <>
       <div className="user-details">
         <Row>
           <Col>
-            <h2 className="username">{(userDetail && userDetail.username) || '@' + match.params.username}</h2>
+            <h2 className="username">
+              {(userDetail && userDetail.username) ||
+                '@' + match.params.username}
+            </h2>
             <h3 className="oneup-count">{oneUps.length || 0} 1-Ups</h3>
-            {user3BoxDetail && (<p>{user3BoxDetail.emoji}</p>)}
+            {user3BoxDetail && <p>{user3BoxDetail.emoji}</p>}
             <div className="button-options">
-              {currentWeb3User && currentWeb3User.username && userDetail && userDetail.ethAddress === currentWeb3User.username && (
-                <Button onClick={() => submitToDAO(oneUps)} variant="info" className="button-primary">
-                  Send to Dao
-                </Button>
-              )}
-              {currentWeb3User && currentWeb3User.username ?
-                (<>
-                  {!userDetail && (<Button href='https://t.me/oneupworld_bot' variant="info" className="button-primary">
-                    Claim Your Username
-                </Button>)
-                  }
-                </>)
-                : (
-                  <Web3SignIn setCurrentUser={setCurrentUser} />
+              {currentWeb3User &&
+                currentWeb3User.username &&
+                userDetail &&
+                userDetail.ethAddress === currentWeb3User.username && (
+                  <SubmitToDao
+                    oneUps={oneUps}
+                    user={{
+                      username: match.params.username,
+                      ethAddress: currentWeb3User.username,
+                    }}
+                  />
                 )}
+              {currentWeb3User && currentWeb3User.username ? (
+                <>
+                  {!userDetail && (
+                    <Button
+                      href="https://t.me/oneupworld_bot"
+                      variant="info"
+                      className="button-primary"
+                    >
+                      Claim Your Username
+                    </Button>
+                  )}
+                </>
+              ) : (
+                <Web3SignIn setCurrentUser={setCurrentUser} />
+              )}
             </div>
           </Col>
           <Col>
@@ -112,19 +125,40 @@ const UserDetail = ({ match }) => {
             </p>
           </Col>
         </Row>
+
         <Row>
           <Col>
             {loading ? (
               <Spinner animation="grow" variant="info" />
             ) : (
-                <div className="feed-wrapper">
-                  <OneUpFeed
-                    oneUps={oneUps}
-                    handleNav={false}
-                    showChatTitle={true}
-                  />
-                </div>
-              )}
+              <Tabs defaultActiveKey="oneUps" className="Scoreboard">
+                <Tab eventKey="oneUps" title="All 1Ups" className="oneUps">
+                  {loading ? (
+                    <Spinner animation="grow" variant="info" />
+                  ) : (
+                    <OneUpFeed
+                      oneUps={oneUps}
+                      handleNav={false}
+                      isUserDetail={true}
+                    />
+                  )}
+                </Tab>
+                <Tab
+                  eventKey="feed"
+                  title="Submissions"
+                  className="submissions"
+                >
+                  {loading ? (
+                    <Spinner animation="grow" variant="info" />
+                  ) : (
+                    <SubmissionList
+                      submissions={submissions}
+                      handleNav={handleNav}
+                    />
+                  )}
+                </Tab>
+              </Tabs>
+            )}
           </Col>
         </Row>
       </div>

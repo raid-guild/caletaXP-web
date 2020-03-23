@@ -3,7 +3,7 @@ import { Table } from 'react-bootstrap';
 import _ from 'lodash';
 import { timeAgo } from '../../utils/Helpers';
 
-const OneUpFeed = ({ oneUps, handleNav, showChatTitle }) => {
+const OneUpFeed = ({ oneUps, handleNav, isUserDetail, isSubmissionDetail }) => {
   const [sortedOneUps, setSortedOneUps] = useState([]);
 
   useEffect(() => {
@@ -29,7 +29,10 @@ const OneUpFeed = ({ oneUps, handleNav, showChatTitle }) => {
           <td>{oneUp.fields.username}</td>
           <td>{oneUp.fields.sender}</td>
           <td>{timeAgo(oneUp.fields.createdAt)}</td>
-          {showChatTitle ? <td>{oneUp.fields.chatTitle}</td> : null}
+          {isUserDetail || isSubmissionDetail ? (
+            <td>{oneUp.fields.chatTitle}</td>
+          ) : null}
+          {isUserDetail ? <td>{oneUp.status}</td> : null}
         </tr>
       );
     });
@@ -43,7 +46,8 @@ const OneUpFeed = ({ oneUps, handleNav, showChatTitle }) => {
             <th>Name</th>
             <th>Sender</th>
             <th>Time</th>
-            {showChatTitle ? <th>Chat</th> : null}
+            {isUserDetail || isSubmissionDetail ? <th>Chat</th> : null}
+            {isUserDetail ? <th>Status</th> : null}
           </tr>
         </thead>
         <tbody>{renderRows()}</tbody>
