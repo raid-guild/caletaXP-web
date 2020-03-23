@@ -23,6 +23,10 @@ export const timeAgo = dateString => {
   return moment(dateString).fromNow();
 };
 
+export const formattedTime = dateString => {
+  return moment(dateString).format('dddd, MMMM Do YYYY');
+};
+
 const inSubmissionPeriod = dateString => {
   const fromDate = moment()
     .subtract(1, 'weeks')

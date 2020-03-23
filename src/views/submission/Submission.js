@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Spinner } from 'react-bootstrap';
 
 import Box from '3box';
 
 import { get } from '../../utils/Requests';
-import { useInterval } from '../../utils/PollingUtil';
 import OneUpFeed from '../../components/claims/OneUpFeed';
+import { formattedTime } from '../../utils/Helpers';
 
 const Submission = ({ match }) => {
   const [loading, setLoading] = useState(false);
@@ -18,6 +18,7 @@ const Submission = ({ match }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         const submissionRes = await get(`submission/${match.params.id}`);
 
         if (submissionRes.data[0] ?? submissionRes.data[0].fields.ups.length) {
@@ -27,7 +28,8 @@ const Submission = ({ match }) => {
           setOneUps(oneUpsRes.data);
         }
 
-        setSubmission(submissionRes.data);
+        console.log('submissionRes.data', submissionRes.data);
+        setSubmission(submissionRes.data[0]);
         setLoading(false);
       } catch (err) {
         console.log('get err', err);
@@ -75,16 +77,26 @@ const Submission = ({ match }) => {
           </Col>
           <Col>
             <p>can put stuff here</p>
+            {submission.fields ? (
+              <div>
+                <p>Submitted to {submission.fields.daoName} </p>
+                <p>on {formattedTime(submission.fields.createdAt)}</p>
+              </div>
+            ) : null}
           </Col>
         </Row>
 
         <Row>
           <Col>
-            <OneUpFeed
-              oneUps={oneUps}
-              handleNav={false}
-              isSubmissionDetail={true}
-            />
+            {loading ? (
+              <Spinner animation="grow" variant="info" />
+            ) : (
+              <OneUpFeed
+                oneUps={oneUps}
+                handleNav={false}
+                isSubmissionDetail={true}
+              />
+            )}
           </Col>
         </Row>
       </div>
