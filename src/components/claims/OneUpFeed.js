@@ -33,9 +33,7 @@ const OneUpFeed = ({ oneUps, handleNav, isUserDetail, isSubmissionDetail }) => {
             <td>{oneUp.fields.chatTitle}</td>
           ) : null}
           {isUserDetail ? <td>{oneUp.status.icon}</td> : null}
-          {isUserDetail || isSubmissionDetail ? (
-            <td>THIS IS A MESSAGE</td>
-          ) : null}
+          {isUserDetail || isSubmissionDetail ? <td></td> : null}
         </tr>
       );
     });
