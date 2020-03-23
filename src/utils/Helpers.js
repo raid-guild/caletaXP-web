@@ -23,6 +23,10 @@ export const timeAgo = dateString => {
   return moment(dateString).fromNow();
 };
 
+export const formattedTime = dateString => {
+  return moment(dateString).format('dddd, MMMM Do YYYY');
+};
+
 const inSubmissionPeriod = dateString => {
   const fromDate = moment()
     .subtract(1, 'weeks')
@@ -43,11 +47,20 @@ const inCurrentPeriod = dateString => {
 
 export const addOneUpStatus = oneUp => {
   if (inCurrentPeriod(oneUp.fields.createdAt)) {
-    oneUp.status = 'New';
+    oneUp.status = {
+      name: 'new',
+      icon: '⭐',
+    };
   } else if (inSubmissionPeriod(oneUp.fields.createdAt)) {
-    oneUp.status = 'In submission window';
+    oneUp.status = {
+      name: 'window',
+      icon: '🍄',
+    };
   } else {
-    oneUp.status = 'Outside submission window';
+    oneUp.status = {
+      name: 'expired',
+      icon: '💀',
+    };
   }
 
   return oneUp;
