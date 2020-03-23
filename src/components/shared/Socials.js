@@ -19,6 +19,14 @@ const Socials = () => {
       >
         Telegram
       </a>
+      <a
+        className="nav-item"
+        href="https://gitcoin.co/grants/546/1up-world"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Contribute to our Gitcoin Grant
+      </a>
     </div>
   );
 };
