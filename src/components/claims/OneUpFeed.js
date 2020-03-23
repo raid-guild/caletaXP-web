@@ -3,7 +3,7 @@ import { Table } from 'react-bootstrap';
 import _ from 'lodash';
 import { timeAgo } from '../../utils/Helpers';
 
-const OneUpFeed = ({ oneUps, handleNav, isUserDetail }) => {
+const OneUpFeed = ({ oneUps, handleNav, isUserDetail, isSubmissionDetail }) => {
   const [sortedOneUps, setSortedOneUps] = useState([]);
 
   useEffect(() => {
@@ -29,12 +29,10 @@ const OneUpFeed = ({ oneUps, handleNav, isUserDetail }) => {
           <td>{oneUp.fields.username}</td>
           <td>{oneUp.fields.sender}</td>
           <td>{timeAgo(oneUp.fields.createdAt)}</td>
-          {isUserDetail ? (
-            <>
-              <td>{oneUp.fields.chatTitle}</td>
-              <td>{oneUp.status}</td>
-            </>
+          {isUserDetail || isSubmissionDetail ? (
+            <td>{oneUp.fields.chatTitle}</td>
           ) : null}
+          {isUserDetail ? <td>{oneUp.status}</td> : null}
         </tr>
       );
     });
@@ -48,12 +46,8 @@ const OneUpFeed = ({ oneUps, handleNav, isUserDetail }) => {
             <th>Name</th>
             <th>Sender</th>
             <th>Time</th>
-            {isUserDetail ? (
-              <>
-                <th>Chat</th>
-                <th>Status</th>
-              </>
-            ) : null}
+            {isUserDetail || isSubmissionDetail ? <th>Chat</th> : null}
+            {isUserDetail ? <th>Status</th> : null}
           </tr>
         </thead>
         <tbody>{renderRows()}</tbody>

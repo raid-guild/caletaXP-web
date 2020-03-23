@@ -12,7 +12,7 @@ import SubmitToDao from '../../components/submissions/SubmitToDao';
 import { addOneUpStatus } from '../../utils/Helpers';
 import SubmissionList from '../../components/submissions/SubmissionList';
 
-const UserDetail = ({ match }) => {
+const UserDetail = ({ match, history }) => {
   const [loading, setLoading] = useState(false);
   const [oneUps, setOneUps] = useState([]);
   const [submissions, setSubmissions] = useState([]);
@@ -66,6 +66,12 @@ const UserDetail = ({ match }) => {
       get1upProfile();
     }
   }, [match]);
+
+  const handleNav = submissionId => {
+    history.push(
+      `/user-detail/${match.params.username}/submission/${submissionId}`,
+    );
+  };
 
   return (
     <>
@@ -145,7 +151,10 @@ const UserDetail = ({ match }) => {
                   {loading ? (
                     <Spinner animation="grow" variant="info" />
                   ) : (
-                    <SubmissionList submissions={submissions} />
+                    <SubmissionList
+                      submissions={submissions}
+                      handleNav={handleNav}
+                    />
                   )}
                 </Tab>
               </Tabs>

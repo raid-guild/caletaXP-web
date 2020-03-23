@@ -55,8 +55,8 @@ export const addOneUpStatus = oneUp => {
 
 export const buildProposalUrl = (daoData, user, submissionId, oneUps) => {
   const beneficiary = `beneficiary=${user.ethAddress}`;
-  const description = `&description=View the 1up records for this submission here: http://1up.world/user-detail/${user.username}/submissions/${submissionId} \n\n\n**DO NOT EDIT ME**`;
-  const profileUrl = `&url=http://1up.world/user-detail/${user.username}/submissions/${submissionId}`;
+  const description = `&description=View the 1up records for this submission here: http://1up.world/user-detail/${user.username}/submission/${submissionId} \n\n\n**DO NOT EDIT ME**`;
+  const profileUrl = `&url=http://1up.world/user-detail/${user.username}/submission/${submissionId}`;
   const tokenInfo = `&ethReward=0&externalTokenAddress=0x543ff227f64aa17ea132bf9886cab5db55dcaddf&externalTokenReward=0`;
   const rewards = `&nativeTokenReward=${oneUps.length}&reputationReward=${oneUps.length}`;
   const title = `&title=1up Claim for @${user.username} (Submission ${submissionId}) &url=&tags=[]`;

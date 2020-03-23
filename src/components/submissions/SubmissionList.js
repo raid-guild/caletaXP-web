@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 import { timeAgo } from '../../utils/Helpers';
 
-const SubmissionList = ({ submissions }) => {
+const SubmissionList = ({ submissions, handleNav }) => {
   const [sortedSubmissions, setSortedSubmissions] = useState([]);
 
   useEffect(() => {
@@ -17,8 +17,9 @@ const SubmissionList = ({ submissions }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [submissions]);
 
-  const handleClick = username => {
+  const handleClick = submissionId => {
     //redirect to page
+    handleNav(submissionId);
   };
 
   const renderRows = () => {
