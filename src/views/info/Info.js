@@ -56,7 +56,7 @@ const Info = () => {
             </p>
             <p>
               {' '}
-              Start by adding the Telegram bot (@oneuporld_bot) to your chat.
+              Start by adding the Telegram bot (@oneupworld_bot) to your chat.
               The only two commands we support at this stage are: /help and /1up
               @username to dish out points.
             </p>
