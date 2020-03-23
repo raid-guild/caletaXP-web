@@ -27,8 +27,6 @@ const UserDetail = ({ match }) => {
     try {
       const res = await get(`one-up/${match.params.username}`);
 
-      // TODO: hydrate oneups with a status
-
       setOneUps(res.data.map(oneUp => addOneUpStatus(oneUp)));
       setLoading(false);
       setDelay(10000);
@@ -43,7 +41,6 @@ const UserDetail = ({ match }) => {
   useEffect(() => {
     const get3BoxProfile = async () => {
       const profile = await Box.getProfile(userDetail.ethAddress);
-      console.log(profile);
 
       setUser3BoxDetail(profile);
     };
@@ -57,7 +54,6 @@ const UserDetail = ({ match }) => {
       const res = await get(`username/${match.params.username}`);
       if (res.data[0]) {
         setUserDetail(res.data[0].fields);
-        console.log(res.data[0].fields);
       }
     };
     if (match.params.username) {
@@ -83,8 +79,10 @@ const UserDetail = ({ match }) => {
                 userDetail.ethAddress === currentWeb3User.username && (
                   <SubmitToDao
                     oneUps={oneUps}
-                    username={match.params.username}
-                    ethAddress={currentWeb3User.username}
+                    user={{
+                      username: match.params.username,
+                      ethAddress: currentWeb3User.username,
+                    }}
                   />
                 )}
               {currentWeb3User && currentWeb3User.username ? (
