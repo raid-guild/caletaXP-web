@@ -119,10 +119,9 @@ const UserDetail = ({ match, history }) => {
               These are the points you have accumulated (or points that others
               have given to you).{' '}
             </p>
-            <p>
-              You’ll soon be able to submit these transactions to your community
-              DAO...stay tuned!
-            </p>
+            <p>⭐: New 1Up!</p>
+            <p>🍄: In the submission window</p>
+            <p>💀: Too old to submit</p>
           </Col>
         </Row>
 

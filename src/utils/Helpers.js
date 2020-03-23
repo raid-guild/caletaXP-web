@@ -47,11 +47,20 @@ const inCurrentPeriod = dateString => {
 
 export const addOneUpStatus = oneUp => {
   if (inCurrentPeriod(oneUp.fields.createdAt)) {
-    oneUp.status = 'New';
+    oneUp.status = {
+      name: 'new',
+      icon: '⭐',
+    };
   } else if (inSubmissionPeriod(oneUp.fields.createdAt)) {
-    oneUp.status = 'In submission window';
+    oneUp.status = {
+      name: 'window',
+      icon: '🍄',
+    };
   } else {
-    oneUp.status = 'Outside submission window';
+    oneUp.status = {
+      name: 'expired',
+      icon: '💀',
+    };
   }
 
   return oneUp;

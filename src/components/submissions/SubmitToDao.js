@@ -20,7 +20,7 @@ const SubmitToDao = ({ oneUps, user }) => {
   useEffect(() => {
     if (oneUps.length) {
       const ids = oneUps
-        .filter(oneUp => oneUp.status === 'In submission window')
+        .filter(oneUp => oneUp.status.name === 'window')
         .map(up => up.id);
 
       setSubmission({
