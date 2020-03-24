@@ -2,7 +2,7 @@ import moment from 'moment';
 
 moment.updateLocale('en', {
   relativeTime: {
-    future: 'in %s',
+    future: '%s',
     past: '%s ago',
     s: 'a few s',
     ss: '%d s',
@@ -18,6 +18,13 @@ moment.updateLocale('en', {
     yy: '%d yr',
   },
 });
+
+export const submissionDeadline = () => {
+  const deadline = moment()
+    .endOf('isoWeek')
+    .endOf('day');
+  return moment().to(deadline);
+};
 
 export const timeAgo = dateString => {
   return moment(dateString).fromNow();
