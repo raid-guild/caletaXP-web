@@ -1,21 +1,22 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Row, Col, Spinner, Button, Tabs, Tab } from 'react-bootstrap';
-
 import Box from '3box';
 
-import OneUpFeed from '../../components/claims/OneUpFeed';
 import { get } from '../../utils/Requests';
 import { useInterval } from '../../utils/PollingUtil';
 import { Web3SignIn } from '../../components/account/Web3SignIn';
 import { CurrentUserContext } from '../../contexts/Store';
-import SubmitToDao from '../../components/submissions/SubmitToDao';
 import { addOneUpStatus } from '../../utils/Helpers';
+import OneUpFeed from '../../components/claims/OneUpFeed';
+import SubmitToDao from '../../components/submissions/SubmitToDao';
 import SubmissionList from '../../components/submissions/SubmissionList';
+import SubmissionCountdown from '../../components/submissions/SubmissionCountdown';
 
 const UserDetail = ({ match, history }) => {
   const [loading, setLoading] = useState(false);
   const [oneUps, setOneUps] = useState([]);
   const [submissions, setSubmissions] = useState([]);
+  const [validSubmissionCount, setValidSubmissionCount] = useState();
   const [userDetail, setUserDetail] = useState();
   const [user3BoxDetail, setUser3BoxDetail] = useState();
   const [currentWeb3User, setCurrentUser] = useContext(CurrentUserContext);
@@ -32,8 +33,13 @@ const UserDetail = ({ match, history }) => {
         `submissions/username/${match.params.username}`,
       );
 
-      setOneUps(res.data.map(oneUp => addOneUpStatus(oneUp)));
+      const oneUpsStatus = res.data.map(oneUp => addOneUpStatus(oneUp));
+      setOneUps(oneUpsStatus);
       setSubmissions(submissionRes.data);
+      setValidSubmissionCount(
+        oneUpsStatus.filter(up => up.status.name === 'window').length,
+      );
+
       setLoading(false);
       setDelay(10000);
     } catch {
@@ -85,6 +91,9 @@ const UserDetail = ({ match, history }) => {
             <h3 className="oneup-count">{oneUps.length || 0} 1-Ups</h3>
             {user3BoxDetail && <p>{user3BoxDetail.emoji}</p>}
             <div className="button-options">
+              {validSubmissionCount ? (
+                <SubmissionCountdown upCount={validSubmissionCount} />
+              ) : null}
               {currentWeb3User &&
                 currentWeb3User.username &&
                 userDetail &&
@@ -119,9 +128,24 @@ const UserDetail = ({ match, history }) => {
               These are the points you have accumulated (or points that others
               have given to you).{' '}
             </p>
-            <p>⭐: New 1Up!</p>
-            <p>🍄: In the submission window</p>
-            <p>💀: Too old to submit</p>
+            <p>
+              <span role="img" aria-label="new">
+                ⭐
+              </span>
+              : New 1Up!
+            </p>
+            <p>
+              <span role="img" aria-label="valid">
+                🍄
+              </span>
+              : In the submission window
+            </p>
+            <p>
+              <span role="img" aria-label="invalid">
+                💀
+              </span>
+              : Too old to submit
+            </p>
           </Col>
         </Row>
 
