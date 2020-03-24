@@ -19,6 +19,13 @@ moment.updateLocale('en', {
   },
 });
 
+export const submissionDeadline = () => {
+  const deadline = moment()
+    .endOf('isoWeek')
+    .endOf('day');
+  return moment().to(deadline);
+};
+
 export const timeAgo = dateString => {
   return moment(dateString).fromNow();
 };

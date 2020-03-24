@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { buildProposalUrl } from '../../utils/Helpers';
 import { post } from '../../utils/Requests';
+import SubmissionCountdown from './SubmissionCountdown';
 
 const SubmitToDao = ({ oneUps, user }) => {
   const [submission, setSubmission] = useState();
@@ -53,14 +54,17 @@ const SubmitToDao = ({ oneUps, user }) => {
   return (
     <>
       {submission ? (
-        <Button
-          onClick={() => handleSubmit(oneUps)}
-          variant="info"
-          className="button-primary"
-          disabled={submitted || !submission.ups.length}
-        >
-          Send to Dao
-        </Button>
+        <>
+          <SubmissionCountdown />
+          <Button
+            onClick={() => handleSubmit(oneUps)}
+            variant="info"
+            className="button-primary"
+            disabled={submitted || !submission.ups.length}
+          >
+            Send to Dao
+          </Button>
+        </>
       ) : null}
     </>
   );
