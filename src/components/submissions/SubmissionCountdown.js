@@ -1,11 +1,13 @@
 import React from 'react';
 import { submissionDeadline } from '../../utils/Helpers';
 
-const SubmissionCountdown = () => {
+const SubmissionCountdown = ({ upCount }) => {
   const time = submissionDeadline();
   return (
     <div className="social-links">
-      <p>Submission deadline for last week&apos;s 1Ups is {time}</p>
+      <p>
+        {time} left to claim {upCount} 1Ups
+      </p>
     </div>
   );
 };

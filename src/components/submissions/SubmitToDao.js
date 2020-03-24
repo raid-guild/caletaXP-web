@@ -55,7 +55,7 @@ const SubmitToDao = ({ oneUps, user }) => {
     <>
       {submission ? (
         <>
-          <SubmissionCountdown />
+          <SubmissionCountdown upCount={submission.ups.length} />
           <Button
             onClick={() => handleSubmit(oneUps)}
             variant="info"
