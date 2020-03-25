@@ -50,12 +50,13 @@ const Home = ({ history }) => {
               games.
             </h2>
             <p>
-              1up keeps track of value added activities within your community.
-              Simply connect our Telegram bot (soon Discord), and start playing!
+            1UP keeps track of value added activities within your community.
+            Simply connect our Telegram bot (soon Discord), and start playing by using
+            the command /1up @username! Rewards are coming soon.
             </p>
             <p>
-              Join our community if you would like to contribute, cool mind
-              blowing things are around the corner.
+            Remember to submit your 1UPs every week, since they expire. Join our community
+            if you would like to contribute, mind blowing things are around the corner.
             </p>
 
             <Link to="/info">

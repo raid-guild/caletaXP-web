@@ -37,6 +37,8 @@ const Submission = ({ match }) => {
     };
 
     fetchData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -64,10 +66,10 @@ const Submission = ({ match }) => {
 
   return (
     <>
-      <div className="user-details">
+      <div className="user-details submissions-page">
         <Row>
           <Col>
-            <h2>Submission {match.params.id}</h2>
+            <h2 className="submission-id">Submission {match.params.id}</h2>
             <h2 className="username">
               {(userDetail && userDetail.username) ||
                 '@' + match.params.username}
@@ -76,17 +78,15 @@ const Submission = ({ match }) => {
             {user3BoxDetail && <p>{user3BoxDetail.emoji}</p>}
           </Col>
           <Col>
-            <p>can put stuff here</p>
             {submission.fields ? (
               <div>
-                <p>Submitted to {submission.fields.daoName} </p>
-                <p>on {formattedTime(submission.fields.createdAt)}</p>
+                <p>Submitted to {submission.fields.daoName} on {formattedTime(submission.fields.createdAt)}</p>
               </div>
             ) : null}
           </Col>
         </Row>
 
-        <Row>
+        <Row className="table-outline">
           <Col>
             {loading ? (
               <Spinner animation="grow" variant="info" />

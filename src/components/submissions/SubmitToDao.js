@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
+
 import { buildProposalUrl } from '../../utils/Helpers';
 import { post } from '../../utils/Requests';
-import SubmissionCountdown from './SubmissionCountdown';
 
 const SubmitToDao = ({ oneUps, user }) => {
   const [submission, setSubmission] = useState();
@@ -55,7 +55,6 @@ const SubmitToDao = ({ oneUps, user }) => {
     <>
       {submission ? (
         <>
-          <SubmissionCountdown upCount={submission.ups.length} />
           <Button
             onClick={() => handleSubmit(oneUps)}
             variant="info"
