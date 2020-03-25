@@ -110,7 +110,7 @@ const UserDetail = ({ match, history }) => {
                 <>
                   {!userDetail && (
                     <Button
-                      href="https://t.me/oneupworld_bot"
+                      href={`https://t.me/oneupworld_bot?start=${currentWeb3User.username}`}
                       variant="info"
                       className="button-primary"
                     >
