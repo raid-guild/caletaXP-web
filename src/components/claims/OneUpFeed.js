@@ -26,13 +26,13 @@ const OneUpFeed = ({ oneUps, handleNav, isUserDetail, isSubmissionDetail }) => {
     return sortedOneUps.map(oneUp => {
       return (
         <tr key={oneUp.id} onClick={() => handleClick(oneUp.fields.username)}>
+          {isUserDetail ? <td>{oneUp.status.icon}</td> : null}
           {!isUserDetail ? <td>{oneUp.fields.username}</td> : null}
           <td>{oneUp.fields.sender}</td>
           <td>{timeAgo(oneUp.fields.createdAt)}</td>
           {isUserDetail || isSubmissionDetail ? (
             <td>{oneUp.fields.chatTitle}</td>
           ) : null}
-          {isUserDetail ? <td>{oneUp.status.icon}</td> : null}
           {isUserDetail || isSubmissionDetail ? (
             <td>{oneUp.fields.message}</td>
           ) : null}
@@ -43,14 +43,14 @@ const OneUpFeed = ({ oneUps, handleNav, isUserDetail, isSubmissionDetail }) => {
 
   return (
     <>
-      <Table hover>
+      <Table hover className="all-1ups">
         <thead>
           <tr>
-            {!isUserDetail ? <th>Name</th> : null}
-            <th>Sender</th>
+            {isUserDetail ? <th></th> : null}
+            {!isUserDetail ? <th>To</th> : null}
+            <th>From</th>
             <th>Time</th>
             {isUserDetail || isSubmissionDetail ? <th>Chat</th> : null}
-            {isUserDetail ? <th>Status</th> : null}
             {isUserDetail || isSubmissionDetail ? <th>Message</th> : null}
           </tr>
         </thead>

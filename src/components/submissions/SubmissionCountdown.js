@@ -4,9 +4,9 @@ import { submissionDeadline } from '../../utils/Helpers';
 const SubmissionCountdown = ({ upCount }) => {
   const time = submissionDeadline();
   return (
-    <div className="social-links">
+    <div className="countdown-timer">
       <p>
-        {time} left to claim {upCount} 1Ups
+        <span>{time}</span> left to claim <span>{upCount}</span> 1Ups
       </p>
     </div>
   );

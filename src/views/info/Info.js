@@ -31,12 +31,13 @@ const Info = () => {
           <Col>
             <h2>WHAT IS THIS?</h2>
             <p>
-              These are the points you have accumulated (or points that others
-              have given to you).{' '}
+            1UPs are points that others have given to you for work / contributions you have done.
+            1UPs need to be submitted to the 1UP DAO within 1 week of receiving them… otherwise, they expire. {' '}
             </p>
             <p>
-              You’ll soon be able to submit these transactions to your community
-              DAO...stay tuned!
+            Submitted 1UPs are aggregated within the 1UP DAO, effectively granting you voting power and 1UP tokens.
+            Over time,  1UP can be spent on rewards (which haven't been created yet).
+            1UPs can be given for anything that deserves one, but at the end of the day, they will be approved by the DAO. Gamified life, here we go!
             </p>
           </Col>
           <Col className="center-me">
@@ -50,24 +51,24 @@ const Info = () => {
           <Col>
             <h2>WHAT'S THIS ABOUT</h2>
             <p>
-              1up aims to become a core piece of infrastructure in our bid to
-              gamify life, by dishing out XP in native chats before people are
-              even aware of web3.
+            1UP aims to become a core piece of infrastructure in our bid to gamify life,
+            by dishing out 1UPs in native chats before people are even aware of web3.
             </p>
             <p>
               {' '}
               Start by adding the Telegram bot (@oneupworld_bot) to your chat.
-              The only two commands we support at this stage are: /help and /1up
-              @username to dish out points.
+              The only two commands we support at this stage are: /help and /1up @username to dish out points.
             </p>
           </Col>
         </Row>
         <Row>
           <Col>
-            <h2>COME EAT SOME DOG FOOD.</h2>
+            <h2>JOIN THE EXPERIMENT.</h2>
             <p>
-              Lots left to do, come join the party as we move past prototype,
-              and into the game.
+            Right now, there is only a single “1UP” game. The vision is to allow any community to run a 1UP game,
+            in parallel to their existing community, and to expand this concept to various networks.
+            We also need to build our “game” which will be at the center of the action. Come join the party,
+            as we move past prototype, and into the future.
             </p>
             <Socials />
           </Col>

@@ -44,13 +44,13 @@ const SubmissionList = ({ submissions, handleNav }) => {
 
   return (
     <>
-      <Table hover>
+      <Table hover className="submissions">
         <thead>
           <tr>
             <th>ID</th>
-            <th>Dao</th>
+            <th>Dao Name</th>
             <th>Username/Address</th>
-            <th>1Up count</th>
+            <th>1UPs</th>
             <th>Time</th>
           </tr>
         </thead>
