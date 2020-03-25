@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Row, Col, Spinner, Button, Tabs, Tab } from 'react-bootstrap';
+import { Row, Col, Spinner, Button, Tabs, Tab, Image } from 'react-bootstrap';
 import Box from '3box';
 
 import { get } from '../../utils/Requests';
@@ -53,6 +53,7 @@ const UserDetail = ({ match, history }) => {
   useEffect(() => {
     const get3BoxProfile = async () => {
       const profile = await Box.getProfile(userDetail.ethAddress);
+      console.log(profile);
 
       setUser3BoxDetail(profile);
     };
@@ -89,7 +90,21 @@ const UserDetail = ({ match, history }) => {
                 '@' + match.params.username}
             </h2>
             <h3 className="oneup-count">{oneUps.length || 0} 1-Ups</h3>
-            {user3BoxDetail && <p>{user3BoxDetail.emoji}</p>}
+            {user3BoxDetail &&
+              <a href={
+                currentWeb3User &&
+                  userDetail &&
+                  userDetail.ethAddress === currentWeb3User.username
+                  ? `https://3box.io/${userDetail.ethAddress}/edit`
+                  : `https://3box.io/${userDetail.ethAddress}`} target="_blank" rel="noopener noreferrer">
+                <p>
+                  <Image width="40" height="40" style={{ backgroundColor: '#b5b5b5' }}
+                    src={
+                      user3BoxDetail.image
+                        ? `https://ipfs.infura.io/ipfs/${user3BoxDetail.image[0].contentUrl['/']}`
+                        : null} roundedCircle />
+                  {" "}{user3BoxDetail.name} {user3BoxDetail.emoji}</p>
+              </a>}
             <div className="button-options">
               {validSubmissionCount ? (
                 <SubmissionCountdown upCount={validSubmissionCount} />
@@ -119,8 +134,8 @@ const UserDetail = ({ match, history }) => {
                   )}
                 </>
               ) : (
-                <Web3SignIn setCurrentUser={setCurrentUser} />
-              )}
+                  <Web3SignIn setCurrentUser={setCurrentUser} />
+                )}
             </div>
           </Col>
           <Col>
@@ -154,34 +169,34 @@ const UserDetail = ({ match, history }) => {
             {loading ? (
               <Spinner animation="grow" variant="info" />
             ) : (
-              <Tabs defaultActiveKey="oneUps" className="Scoreboard">
-                <Tab eventKey="oneUps" title="All 1Ups" className="oneUps">
-                  {loading ? (
-                    <Spinner animation="grow" variant="info" />
-                  ) : (
-                    <OneUpFeed
-                      oneUps={oneUps}
-                      handleNav={false}
-                      isUserDetail={true}
-                    />
-                  )}
-                </Tab>
-                <Tab
-                  eventKey="feed"
-                  title="Submissions"
-                  className="submissions"
-                >
-                  {loading ? (
-                    <Spinner animation="grow" variant="info" />
-                  ) : (
-                    <SubmissionList
-                      submissions={submissions}
-                      handleNav={handleNav}
-                    />
-                  )}
-                </Tab>
-              </Tabs>
-            )}
+                <Tabs defaultActiveKey="oneUps" className="Scoreboard">
+                  <Tab eventKey="oneUps" title="All 1Ups" className="oneUps">
+                    {loading ? (
+                      <Spinner animation="grow" variant="info" />
+                    ) : (
+                        <OneUpFeed
+                          oneUps={oneUps}
+                          handleNav={false}
+                          isUserDetail={true}
+                        />
+                      )}
+                  </Tab>
+                  <Tab
+                    eventKey="feed"
+                    title="Submissions"
+                    className="submissions"
+                  >
+                    {loading ? (
+                      <Spinner animation="grow" variant="info" />
+                    ) : (
+                        <SubmissionList
+                          submissions={submissions}
+                          handleNav={handleNav}
+                        />
+                      )}
+                  </Tab>
+                </Tabs>
+              )}
           </Col>
         </Row>
       </div>
