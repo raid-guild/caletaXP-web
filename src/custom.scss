@@ -319,12 +319,14 @@ a:active, a:focus {
           &:nth-child(1) {
             width: 5vw !important;
             text-overflow: unset;
-
+            @media (min-width: 1280px) {
+              width: 3vw !important;
+            }
           }
           &:nth-child(2) {
             width: 17vw !important;
-              @media (max-width: 768px) {
-
+              @media (min-width: 1280px) {
+                width: 10vw !important;
               }
             }
           &:nth-child(3) {
@@ -335,11 +337,14 @@ a:active, a:focus {
               @media (max-width: 768px) {
                 display: none;
               }
+              @media (min-width: 1280px) {
+                width: 5vw !important;
+              }
             }
           &:nth-child(4) {
             width: 17vw !important;
-              @media (max-width: 768px) {
-
+              @media (min-width: 1280px) {
+                width: 13vw !important;
               }
             }
           }
@@ -363,8 +368,8 @@ a:active, a:focus {
           }
           &:nth-child(2) {
             width: 15vw !important;
-              @media (max-width: 768px) {
-
+              @media (min-width: 1280px) {
+                width: 10vw !important;
               }
             }
           &:nth-child(3) {
@@ -374,8 +379,8 @@ a:active, a:focus {
             }
           &:nth-child(4) {
             width: 10vw !important;
-              @media (max-width: 768px) {
-
+              @media (min-width: 1280px) {
+                width: 5vw !important;
               }
             }
           &:nth-child(5) {
@@ -406,7 +411,7 @@ a:active, a:focus {
   }
 }
 
-// Applies to ALL TABLES
+// Applies to ALL TABLES except SUBMISSIONS
 table {
   table-layout: fixed;
   td {
@@ -591,13 +596,15 @@ table {
       th, td {
       &:nth-child(1) {
         width: 15vw !important;
-        text-overflow: unset;
-
+        display: none;
+        @media (min-width: 1280px) {
+          width: 10vw !important;
+        }
       }
       &:nth-child(2) {
         width: 15vw !important;
-          @media (max-width: 768px) {
-
+          @media (min-width: 1280px) {
+            width: 10vw !important;
           }
         }
       &:nth-child(3) {
@@ -610,9 +617,9 @@ table {
           }
         }
       &:nth-child(4) {
-        width: 17vw !important;
-          @media (max-width: 768px) {
-
+        width: 13vw !important;
+          @media (min-width: 1280px) {
+            width: 8vw !important;
           }
         }
       }
