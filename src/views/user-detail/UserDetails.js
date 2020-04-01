@@ -90,21 +90,34 @@ const UserDetail = ({ match, history }) => {
                 '@' + match.params.username}
             </h2>
             <h3 className="oneup-count">{oneUps.length || 0} 1-Ups</h3>
-            {user3BoxDetail &&
-              <a href={
-                currentWeb3User &&
+            {user3BoxDetail && (
+              <a
+                href={
+                  currentWeb3User &&
                   userDetail &&
                   userDetail.ethAddress === currentWeb3User.username
-                  ? `https://3box.io/${userDetail.ethAddress}/edit`
-                  : `https://3box.io/${userDetail.ethAddress}`} target="_blank" rel="noopener noreferrer">
+                    ? `https://3box.io/${userDetail.ethAddress}/edit`
+                    : `https://3box.io/${userDetail.ethAddress}`
+                }
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <p>
-                  <Image width="40" height="40" style={{ backgroundColor: '#b5b5b5' }}
+                  <Image
+                    width="40"
+                    height="40"
+                    style={{ backgroundColor: '#b5b5b5' }}
                     src={
                       user3BoxDetail.image
                         ? `https://ipfs.infura.io/ipfs/${user3BoxDetail.image[0].contentUrl['/']}`
-                        : null} roundedCircle />
-                  {" "}{user3BoxDetail.name} {user3BoxDetail.emoji}</p>
-              </a>}
+                        : null
+                    }
+                    roundedCircle
+                  />{' '}
+                  {user3BoxDetail.name} {user3BoxDetail.emoji}
+                </p>
+              </a>
+            )}
             <div className="button-options">
               {validSubmissionCount ? (
                 <SubmissionCountdown upCount={validSubmissionCount} />
@@ -134,14 +147,14 @@ const UserDetail = ({ match, history }) => {
                   )}
                 </>
               ) : (
-                  <Web3SignIn setCurrentUser={setCurrentUser} />
-                )}
+                <Web3SignIn setCurrentUser={setCurrentUser} />
+              )}
             </div>
           </Col>
           <Col>
             <p>
-              These are the points you have accumulated (or points that others
-              have given to you).{' '}
+              These are the points that others have given to you. You can only
+              submit points 1 week after you have earned them!{' '}
             </p>
             <p>
               <span role="img" aria-label="new">
@@ -169,34 +182,34 @@ const UserDetail = ({ match, history }) => {
             {loading ? (
               <Spinner animation="grow" variant="info" />
             ) : (
-                <Tabs defaultActiveKey="oneUps" className="Scoreboard">
-                  <Tab eventKey="oneUps" title="All 1Ups" className="oneUps">
-                    {loading ? (
-                      <Spinner animation="grow" variant="info" />
-                    ) : (
-                        <OneUpFeed
-                          oneUps={oneUps}
-                          handleNav={false}
-                          isUserDetail={true}
-                        />
-                      )}
-                  </Tab>
-                  <Tab
-                    eventKey="feed"
-                    title="Submissions"
-                    className="submissions"
-                  >
-                    {loading ? (
-                      <Spinner animation="grow" variant="info" />
-                    ) : (
-                        <SubmissionList
-                          submissions={submissions}
-                          handleNav={handleNav}
-                        />
-                      )}
-                  </Tab>
-                </Tabs>
-              )}
+              <Tabs defaultActiveKey="oneUps" className="Scoreboard">
+                <Tab eventKey="oneUps" title="All 1Ups" className="oneUps">
+                  {loading ? (
+                    <Spinner animation="grow" variant="info" />
+                  ) : (
+                    <OneUpFeed
+                      oneUps={oneUps}
+                      handleNav={false}
+                      isUserDetail={true}
+                    />
+                  )}
+                </Tab>
+                <Tab
+                  eventKey="feed"
+                  title="Submissions"
+                  className="submissions"
+                >
+                  {loading ? (
+                    <Spinner animation="grow" variant="info" />
+                  ) : (
+                    <SubmissionList
+                      submissions={submissions}
+                      handleNav={handleNav}
+                    />
+                  )}
+                </Tab>
+              </Tabs>
+            )}
           </Col>
         </Row>
       </div>
