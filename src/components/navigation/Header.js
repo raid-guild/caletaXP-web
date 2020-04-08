@@ -7,7 +7,7 @@ import LogoSrc from '../../assets/img/1up-logo.png';
 
 const Logo = styled.img`
   width: 50%;
-  margin: 15px 15px 15px 0px;
+  margin: 15px 15px 15px -10px;
   @media (max-width: 768px) {
     width: 60%;
   }

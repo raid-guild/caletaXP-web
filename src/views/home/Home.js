@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Row, Col, Tabs, Tab, Button, Spinner } from 'react-bootstrap';
+import styled from 'styled-components';
 
 import OneUpFeed from '../../components/claims/OneUpFeed';
 import OneUpHighScores from '../../components/claims/OneUpHighScores';
@@ -8,6 +9,14 @@ import { get } from '../../utils/Requests';
 import { useInterval } from '../../utils/PollingUtil';
 
 import Socials from '../../components/shared/Socials';
+import DragonQuestSrc from '../../assets/img/dragonquest-sponsor.png';
+
+const DragonQuest = styled.img`
+  width: 80%;
+  margin: 0 auto;
+  padding: 30px 0;
+
+`;
 
 const Home = ({ history }) => {
   const [loading, setLoading] = useState(false);
@@ -92,7 +101,12 @@ const Home = ({ history }) => {
           </Col>
         </Row>
         <Row>
-          <h1 className="insert-coin">insert coin</h1>
+          <Col md="5">
+            <a href="https://explorer.bounties.network/bounty/3936" target="_blank"><DragonQuest src={DragonQuestSrc} /></a>
+          </Col>
+          <Col>
+            <h1 className="insert-coin">insert coin</h1>
+          </Col>
         </Row>
       </div>
     </>
