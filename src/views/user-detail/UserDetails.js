@@ -35,6 +35,7 @@ const UserDetail = ({ match, history }) => {
 
       const oneUpsStatus = res.data.map(oneUp => addOneUpStatus(oneUp));
       setOneUps(oneUpsStatus);
+
       setSubmissions(submissionRes.data);
       setValidSubmissionCount(
         oneUpsStatus.filter(up => up.status.name === 'window').length,
@@ -53,7 +54,6 @@ const UserDetail = ({ match, history }) => {
   useEffect(() => {
     const get3BoxProfile = async () => {
       const profile = await Box.getProfile(userDetail.ethAddress);
-      console.log(profile);
 
       setUser3BoxDetail(profile);
     };
@@ -65,6 +65,7 @@ const UserDetail = ({ match, history }) => {
   useEffect(() => {
     const get1upProfile = async () => {
       const res = await get(`username/${match.params.username}`);
+
       if (res.data[0]) {
         setUserDetail(res.data[0].fields);
       }
@@ -136,14 +137,26 @@ const UserDetail = ({ match, history }) => {
                 )}
               {currentWeb3User && currentWeb3User.username ? (
                 <>
-                  {!userDetail && (
-                    <Button
-                      href={`https://t.me/oneupworld_bot?start=${currentWeb3User.username}`}
-                      variant="info"
-                      className="button-primary"
-                    >
-                      Claim Your Username
-                    </Button>
+                  {!userDetail && oneUps.length && (
+                    <>
+                      {oneUps[0].fields.sourceName === 'discord' ? (
+                        <Button
+                          href={`https://discordapp.com/channels/@me/705176680284684289`}
+                          variant="info"
+                          className="button-primary"
+                        >
+                          Claim Your Username
+                        </Button>
+                      ) : (
+                        <Button
+                          href={`https://t.me/oneupworld_bot?start=${currentWeb3User.username}`}
+                          variant="info"
+                          className="button-primary"
+                        >
+                          Claim Your Username
+                        </Button>
+                      )}
+                    </>
                   )}
                 </>
               ) : (
