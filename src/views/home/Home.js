@@ -102,7 +102,7 @@ const Home = ({ history }) => {
         </Row>
         <Row>
           <Col md="5">
-            <a href="https://explorer.bounties.network/bounty/3936" target="_blank"><DragonQuest src={DragonQuestSrc} /></a>
+            <a href="https://explorer.bounties.network/bounty/3936" target="_blank" rel="noopener noreferrer"><DragonQuest src={DragonQuestSrc} /></a>
           </Col>
           <Col>
             <h1 className="insert-coin">insert coin</h1>
