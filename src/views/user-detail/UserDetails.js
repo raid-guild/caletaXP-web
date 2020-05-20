@@ -5,12 +5,14 @@ import Box from '3box';
 import { get } from '../../utils/Requests';
 import { useInterval } from '../../utils/PollingUtil';
 import { Web3SignIn } from '../../components/account/Web3SignIn';
-import { CurrentUserContext } from '../../contexts/Store';
+import { CurrentUserContext, Web3ConnectContext, addresses } from '../../contexts/Store';
 import { addOneUpStatus } from '../../utils/Helpers';
 import OneUpFeed from '../../components/claims/OneUpFeed';
 import SubmitToDao from '../../components/submissions/SubmitToDao';
 import SubmissionList from '../../components/submissions/SubmissionList';
 import SubmissionCountdown from '../../components/submissions/SubmissionCountdown';
+
+import ERC20Abi from '../../contracts/erc20.json';
 
 const UserDetail = ({ match, history }) => {
   const [loading, setLoading] = useState(false);
@@ -19,7 +21,9 @@ const UserDetail = ({ match, history }) => {
   const [validSubmissionCount, setValidSubmissionCount] = useState();
   const [userDetail, setUserDetail] = useState();
   const [user3BoxDetail, setUser3BoxDetail] = useState();
+  const [upBalance, setUpBalance] = useState();
   const [currentWeb3User, setCurrentUser] = useContext(CurrentUserContext);
+  const [w3c] = useContext(Web3ConnectContext);
 
   const [delay, setDelay] = useState(300);
   const fetchData = async () => {
@@ -52,15 +56,27 @@ const UserDetail = ({ match, history }) => {
   useInterval(fetchData, delay);
 
   useEffect(() => {
-    const get3BoxProfile = async () => {
+    const upAddress =
+      +process.env.REACT_APP_CHAIN_ID === 42
+        ? addresses.kovan.upToken
+        : addresses.main.upToken;
+
+    const get3BoxProfileAndTokens = async () => {
       const profile = await Box.getProfile(userDetail.ethAddress);
 
+      const contract = new w3c.web3.eth.Contract(ERC20Abi, upAddress);
+
+      const upBalanceInWei = await contract.methods
+        .balanceOf(userDetail.ethAddress)
+        .call();
+      const tokens = w3c.web3.utils.fromWei('' + upBalanceInWei);
+      setUpBalance(tokens);
       setUser3BoxDetail(profile);
     };
     if (userDetail && userDetail.ethAddress) {
-      get3BoxProfile();
+      get3BoxProfileAndTokens();
     }
-  }, [userDetail]);
+  }, [userDetail, w3c]);
 
   useEffect(() => {
     const get1upProfile = async () => {
@@ -92,32 +108,40 @@ const UserDetail = ({ match, history }) => {
             </h2>
             <h3 className="oneup-count">{oneUps.length || 0} 1-Ups</h3>
             {user3BoxDetail && (
-              <a
-                href={
-                  currentWeb3User &&
-                  userDetail &&
-                  userDetail.ethAddress === currentWeb3User.username
-                    ? `https://3box.io/${userDetail.ethAddress}/edit`
-                    : `https://3box.io/${userDetail.ethAddress}`
-                }
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <p>
-                  <Image
-                    width="40"
-                    height="40"
-                    style={{ backgroundColor: '#b5b5b5' }}
-                    src={
-                      user3BoxDetail.image
-                        ? `https://ipfs.infura.io/ipfs/${user3BoxDetail.image[0].contentUrl['/']}`
-                        : null
-                    }
-                    roundedCircle
-                  />{' '}
-                  {user3BoxDetail.name} {user3BoxDetail.emoji}
-                </p>
-              </a>
+              <>
+                <a
+                  href={
+                    currentWeb3User &&
+                    userDetail &&
+                    userDetail.ethAddress === currentWeb3User.username
+                      ? `https://3box.io/${userDetail.ethAddress}/edit`
+                      : `https://3box.io/${userDetail.ethAddress}`
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <p>
+                    <Image
+                      width="40"
+                      height="40"
+                      style={{ backgroundColor: '#b5b5b5' }}
+                      src={
+                        user3BoxDetail.image
+                          ? `https://ipfs.infura.io/ipfs/${user3BoxDetail.image[0].contentUrl['/']}`
+                          : null
+                      }
+                      roundedCircle
+                    />{' '}
+                    {user3BoxDetail.name} {user3BoxDetail.emoji}
+                  </p>
+                </a>
+                <div className="upBalance">
+                  <h3 className="oneup-count">
+                    Current 1UP Tokens:{' '}
+                    {parseFloat(upBalance).toFixed(2)}
+                  </h3>
+                </div>
+              </>
             )}
             <div className="button-options">
               {validSubmissionCount ? (
@@ -127,13 +151,6 @@ const UserDetail = ({ match, history }) => {
                 currentWeb3User.username &&
                 userDetail &&
                 userDetail.ethAddress === currentWeb3User.username && (
-                  <>
-                    <div className="upBalance">
-                      <h3 className="oneup-count">
-                        Current 1UP Tokens:{' '}
-                        {parseFloat(currentWeb3User.upBalance).toFixed(2)}
-                      </h3>
-                    </div>
                     <SubmitToDao
                       oneUps={oneUps}
                       user={{
@@ -141,7 +158,6 @@ const UserDetail = ({ match, history }) => {
                         ethAddress: currentWeb3User.username,
                       }}
                     />
-                  </>
                 )}
               {currentWeb3User && currentWeb3User.username ? (
                 <>
