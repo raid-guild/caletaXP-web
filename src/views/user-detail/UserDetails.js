@@ -127,13 +127,21 @@ const UserDetail = ({ match, history }) => {
                 currentWeb3User.username &&
                 userDetail &&
                 userDetail.ethAddress === currentWeb3User.username && (
-                  <SubmitToDao
-                    oneUps={oneUps}
-                    user={{
-                      username: match.params.username,
-                      ethAddress: currentWeb3User.username,
-                    }}
-                  />
+                  <>
+                    <div className="upBalance">
+                      <h3 className="oneup-count">
+                        Current 1UP Tokens:{' '}
+                        {parseFloat(currentWeb3User.upBalance).toFixed(2)}
+                      </h3>
+                    </div>
+                    <SubmitToDao
+                      oneUps={oneUps}
+                      user={{
+                        username: match.params.username,
+                        ethAddress: currentWeb3User.username,
+                      }}
+                    />
+                  </>
                 )}
               {currentWeb3User && currentWeb3User.username ? (
                 <>
