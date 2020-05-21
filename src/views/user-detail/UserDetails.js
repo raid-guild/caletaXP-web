@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Row, Col, Spinner, Button, Tabs, Tab, Image } from 'react-bootstrap';
+import { Row, Col, Spinner, Button, Tabs, Tab, Image, Modal } from 'react-bootstrap';
 import Box from '3box';
 
 import { get } from '../../utils/Requests';
@@ -23,8 +23,12 @@ const UserDetail = ({ match, history }) => {
   const [userDetail, setUserDetail] = useState();
   const [user3BoxDetail, setUser3BoxDetail] = useState();
   const [upBalance, setUpBalance] = useState();
+  const [modalShow, setModalShow] = useState(false);
   const [currentWeb3User, setCurrentUser] = useContext(CurrentUserContext);
   const [w3c] = useContext(Web3ConnectContext);
+
+  const handleModalClose = () => setModalShow(false);
+  const handleModalShow = () => setModalShow(true);
 
   const [delay, setDelay] = useState(300);
   const fetchData = async () => {
@@ -99,11 +103,12 @@ const UserDetail = ({ match, history }) => {
   };
 
   const handleDiscordClaim = async discordUserId => {
-    console.log(discordUserId);
+    handleModalClose();
     if(discordUserId){
     const res = await get(`claim/discord/${discordUserId}`);
     alert("a message was sent to your Discord with further instructions")
-    console.log(res);
+    console.log("sent dm", res);
+    
     }
 
   };
@@ -176,7 +181,7 @@ const UserDetail = ({ match, history }) => {
                     <>
                       {oneUps[0].fields.sourceName === 'discord' ? (
                         <Button
-                          onClick={() => handleDiscordClaim(oneUps[0].fields.discordUserId)}
+                          onClick={handleModalShow}
                           variant="info"
                           className="button-primary"
                         >
@@ -261,6 +266,21 @@ const UserDetail = ({ match, history }) => {
           </Col>
         </Row>
       </div>
+
+      <Modal show={modalShow} onHide={handleModalClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Calim Ethereum Address</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>This will send a DM to you with instructions to claim this account with your Ethereum Address</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleModalClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={() => handleDiscordClaim(oneUps[0].fields.discordUserId)}>
+            Send Message
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };
