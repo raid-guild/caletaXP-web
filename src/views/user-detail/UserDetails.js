@@ -12,6 +12,7 @@ import SubmitToDao from '../../components/submissions/SubmitToDao';
 import SubmissionList from '../../components/submissions/SubmissionList';
 import SubmissionCountdown from '../../components/submissions/SubmissionCountdown';
 
+
 import ERC20Abi from '../../contracts/erc20.json';
 
 const UserDetail = ({ match, history }) => {
@@ -97,6 +98,16 @@ const UserDetail = ({ match, history }) => {
     );
   };
 
+  const handleDiscordClaim = async discordUserId => {
+    console.log(discordUserId);
+    if(discordUserId){
+    const res = await get(`claim/discord/${discordUserId}`);
+    alert("a message was sent to your Discord with further instructions")
+    console.log(res);
+    }
+
+  };
+
   return (
     <>
       <div className="user-details">
@@ -165,7 +176,7 @@ const UserDetail = ({ match, history }) => {
                     <>
                       {oneUps[0].fields.sourceName === 'discord' ? (
                         <Button
-                          href={`https://discordapp.com/channels/@me/705176680284684289`}
+                          onClick={() => handleDiscordClaim(oneUps[0].fields.discordUserId)}
                           variant="info"
                           className="button-primary"
                         >
