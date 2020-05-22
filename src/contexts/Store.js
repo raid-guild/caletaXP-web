@@ -2,6 +2,7 @@ import React, { useState, useEffect, createContext } from 'react';
 import Web3Connect from 'web3connect';
 import { w3connect, providerOptions, createWeb3User } from '../utils/Auth';
 import { getChainData } from '../utils/Chains';
+// import Web3 from 'web3';
 
 export const LoaderContext = createContext(false);
 export const Web3ConnectContext = createContext();
@@ -31,6 +32,7 @@ const Store = ({ children }) => {
   useEffect(() => {
     const initCurrentUser = async () => {
       let user;
+      
       try {
         const w3c = await w3connect(web3Connect);
         const [account] = await w3c.web3.eth.getAccounts();
@@ -43,9 +45,14 @@ const Store = ({ children }) => {
         console.error(`Could not log in with web3`);
       }
     };
+
     if (web3Connect.cachedProvider) {
       initCurrentUser();
     }
+    //TODO: if web3 is not availible
+    //     w3c.web3 = new Web3(new Web3.providers.HttpProvider(process.env.REACT_APP_INFURA_URI));
+
+
   }, [web3Connect]);
 
   return (

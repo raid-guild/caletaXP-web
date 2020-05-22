@@ -69,13 +69,17 @@ const UserDetail = ({ match, history }) => {
     const get3BoxProfileAndTokens = async () => {
       const profile = await Box.getProfile(userDetail.ethAddress);
 
-      const contract = new w3c.web3.eth.Contract(ERC20Abi, upAddress);
+      //TODO: should use network only infura
+      if(w3c.web3){
+        const contract = new w3c.web3.eth.Contract(ERC20Abi, upAddress);
 
-      const upBalanceInWei = await contract.methods
-        .balanceOf(userDetail.ethAddress)
-        .call();
-      const tokens = w3c.web3.utils.fromWei('' + upBalanceInWei);
-      setUpBalance(tokens);
+        const upBalanceInWei = await contract.methods
+          .balanceOf(userDetail.ethAddress)
+          .call();
+        const tokens = w3c.web3.utils.fromWei('' + upBalanceInWei);
+        setUpBalance(tokens);
+      }
+      
       setUser3BoxDetail(profile);
     };
     if (userDetail && userDetail.ethAddress) {
@@ -151,12 +155,12 @@ const UserDetail = ({ match, history }) => {
                     {user3BoxDetail.name} {user3BoxDetail.emoji}
                   </p>
                 </a>
-                <div className="upBalance">
+                {upBalance && (<div className="upBalance">
                   <h3 className="oneup-count">
                     Current 1UP Tokens:{' '}
                     {parseFloat(upBalance).toFixed(2)}
                   </h3>
-                </div>
+                </div>)}
               </>
             )}
             <div className="button-options">
