@@ -26,6 +26,17 @@ export const submissionDeadline = () => {
   return moment().to(deadline);
 };
 
+export const liveSubmissionDeadline = () => {
+  const deadline = moment()
+    .endOf('isoWeek')
+    .endOf('day');
+  const currentTime = moment();
+  const diffTime = deadline - currentTime;
+  const duration = moment.duration(diffTime, 'milliseconds');
+
+  return duration._data;
+};
+
 export const timeAgo = dateString => {
   return moment(dateString).fromNow();
 };
