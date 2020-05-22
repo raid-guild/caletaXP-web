@@ -10,12 +10,12 @@ import { useInterval } from '../../utils/PollingUtil';
 
 import Socials from '../../components/shared/Socials';
 import DragonQuestSrc from '../../assets/img/dragonquest-sponsor.png';
+import LiveSubmissionCountdown from '../../components/submissions/LiveSubmissionCountdown';
 
 const DragonQuest = styled.img`
   width: 80%;
   margin: 0 auto;
   padding: 30px 0;
-
 `;
 
 const Home = ({ history }) => {
@@ -59,13 +59,14 @@ const Home = ({ history }) => {
               games.
             </h2>
             <p>
-            1UP keeps track of value added activities within your community.
-            Simply connect our Telegram bot (soon Discord), and start playing by using
-            the command /1up @username! Rewards are coming soon.
+              1UP keeps track of value added activities within your community.
+              Simply connect our Telegram bot (soon Discord), and start playing
+              by using the command /1up @username! Rewards are coming soon.
             </p>
             <p>
-            Remember to submit your 1UPs every week, since they expire. Join our community
-            if you would like to contribute, mind blowing things are around the corner.
+              Remember to submit your 1UPs every week, since they expire. Join
+              our community if you would like to contribute, mind blowing things
+              are around the corner.
             </p>
 
             <Link to="/info">
@@ -98,11 +99,19 @@ const Home = ({ history }) => {
                 )}
               </Tab>
             </Tabs>
+
+            <LiveSubmissionCountdown />
           </Col>
         </Row>
         <Row>
           <Col md="5">
-            <a href="https://explorer.bounties.network/bounty/3936" target="_blank" rel="noopener noreferrer"><DragonQuest src={DragonQuestSrc} /></a>
+            <a
+              href="https://explorer.bounties.network/bounty/3936"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <DragonQuest src={DragonQuestSrc} />
+            </a>
           </Col>
           <Col>
             <h1 className="insert-coin">insert coin</h1>
