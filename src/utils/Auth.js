@@ -34,7 +34,6 @@
   };
   
   export const w3connect = async (web3Connect) => {
-    console.log('web3Connect', web3Connect);
     
     const provider = await web3Connect.connect();
   

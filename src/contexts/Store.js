@@ -28,8 +28,6 @@ const Store = ({ children }) => {
       cacheProvider: true,
     }),
   );
-  console.log('web3Connect',web3Connect);
-
 
   useEffect(() => {
     const initCurrentUser = async () => {
