@@ -8,7 +8,6 @@ const LiveSubmissionCountdown = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       const duration = liveSubmissionDeadline();
-      console.log('duration', duration);
       setCountdown(duration);
     }, 1000);
     return () => clearInterval(interval);

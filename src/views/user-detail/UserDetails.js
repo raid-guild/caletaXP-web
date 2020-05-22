@@ -1,18 +1,29 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Row, Col, Spinner, Button, Tabs, Tab, Image, Modal } from 'react-bootstrap';
+import {
+  Row,
+  Col,
+  Spinner,
+  Button,
+  Tabs,
+  Tab,
+  Image,
+  Modal,
+} from 'react-bootstrap';
 import Box from '3box';
 
 import { get } from '../../utils/Requests';
 import { useInterval } from '../../utils/PollingUtil';
 import { Web3SignIn } from '../../components/account/Web3SignIn';
-import { CurrentUserContext, Web3ConnectContext, addresses } from '../../contexts/Store';
+import {
+  CurrentUserContext,
+  Web3ConnectContext,
+  addresses,
+} from '../../contexts/Store';
 import { addOneUpStatus } from '../../utils/Helpers';
 import OneUpFeed from '../../components/claims/OneUpFeed';
 import SubmitToDao from '../../components/submissions/SubmitToDao';
 import SubmissionList from '../../components/submissions/SubmissionList';
 import SubmissionCountdown from '../../components/submissions/SubmissionCountdown';
-
-
 import ERC20Abi from '../../contracts/erc20.json';
 
 const UserDetail = ({ match, history }) => {
@@ -41,19 +52,51 @@ const UserDetail = ({ match, history }) => {
       const submissionRes = await get(
         `submissions/username/${match.params.username}`,
       );
-
       const oneUpsStatus = res.data.map(oneUp => addOneUpStatus(oneUp));
-      setOneUps(oneUpsStatus);
 
-      setSubmissions(submissionRes.data);
-      setValidSubmissionCount(
-        oneUpsStatus.filter(up => up.status.name === 'window').length,
-      );
+      let ethRes;
+      if (userDetail) {
+        ethRes = await get(`ethAddress/${userDetail.ethAddress}`);
+      }
+
+      if (ethRes && ethRes.data.length > 1) {
+        const otherProfile = ethRes.data.find(profile => {
+          return profile.fields.username.substr(1) !== match.params.username;
+        });
+        const otherUps = await get(
+          `one-up/${otherProfile.fields.username.substr(1)}`,
+        );
+        const otherUpsStatus = otherUps.data.map(oneUp =>
+          addOneUpStatus(oneUp),
+        );
+        setOneUps([...oneUpsStatus, ...otherUpsStatus]);
+
+        const otherSubmissionRes = await get(
+          `submissions/username/${otherProfile.fields.username.substr(1)}`,
+        );
+
+        const mergedSubmissions = otherSubmissionRes.data.length
+          ? [...submissionRes.data, ...otherSubmissionRes.data]
+          : submissionRes.data;
+
+        setSubmissions(mergedSubmissions);
+        setValidSubmissionCount(
+          oneUpsStatus.filter(up => up.status.name === 'window').length +
+            otherUpsStatus.filter(up => up.status.name === 'window').length,
+        );
+      } else {
+        setOneUps(oneUpsStatus);
+
+        setSubmissions(submissionRes.data);
+        setValidSubmissionCount(
+          oneUpsStatus.filter(up => up.status.name === 'window').length,
+        );
+      }
 
       setLoading(false);
       setDelay(10000);
-    } catch {
-      console.log('get err');
+    } catch (err) {
+      console.log('get err', err);
       setDelay(null);
     }
   };
@@ -70,7 +113,7 @@ const UserDetail = ({ match, history }) => {
       const profile = await Box.getProfile(userDetail.ethAddress);
 
       //TODO: should use network only infura
-      if(w3c.web3){
+      if (w3c.web3) {
         const contract = new w3c.web3.eth.Contract(ERC20Abi, upAddress);
 
         const upBalanceInWei = await contract.methods
@@ -79,7 +122,7 @@ const UserDetail = ({ match, history }) => {
         const tokens = w3c.web3.utils.fromWei('' + upBalanceInWei);
         setUpBalance(tokens);
       }
-      
+
       setUser3BoxDetail(profile);
     };
     if (userDetail && userDetail.ethAddress) {
@@ -108,13 +151,11 @@ const UserDetail = ({ match, history }) => {
 
   const handleDiscordClaim = async discordUserId => {
     handleModalClose();
-    if(discordUserId){
-    const res = await get(`claim/discord/${discordUserId}`);
-    alert("a message was sent to your Discord with further instructions")
-    console.log("sent dm", res);
-    
+    if (discordUserId) {
+      const res = await get(`claim/discord/${discordUserId}`);
+      alert('a message was sent to your Discord with further instructions');
+      console.log('sent dm', res);
     }
-
   };
 
   return (
@@ -155,12 +196,13 @@ const UserDetail = ({ match, history }) => {
                     {user3BoxDetail.name} {user3BoxDetail.emoji}
                   </p>
                 </a>
-                {upBalance && (<div className="upBalance">
-                  <h3 className="oneup-count">
-                    Current 1UP Tokens:{' '}
-                    {parseFloat(upBalance).toFixed(2)}
-                  </h3>
-                </div>)}
+                {upBalance && (
+                  <div className="upBalance">
+                    <h3 className="oneup-count">
+                      Current 1UP Tokens: {parseFloat(upBalance).toFixed(2)}
+                    </h3>
+                  </div>
+                )}
               </>
             )}
             <div className="button-options">
@@ -171,13 +213,13 @@ const UserDetail = ({ match, history }) => {
                 currentWeb3User.username &&
                 userDetail &&
                 userDetail.ethAddress === currentWeb3User.username && (
-                    <SubmitToDao
-                      oneUps={oneUps}
-                      user={{
-                        username: match.params.username,
-                        ethAddress: currentWeb3User.username,
-                      }}
-                    />
+                  <SubmitToDao
+                    oneUps={oneUps}
+                    user={{
+                      username: match.params.username,
+                      ethAddress: currentWeb3User.username,
+                    }}
+                  />
                 )}
               {currentWeb3User && currentWeb3User.username ? (
                 <>
@@ -275,12 +317,18 @@ const UserDetail = ({ match, history }) => {
         <Modal.Header closeButton>
           <Modal.Title>Calim Ethereum Address</Modal.Title>
         </Modal.Header>
-        <Modal.Body>This will send a DM to you with instructions to claim this account with your Ethereum Address</Modal.Body>
+        <Modal.Body>
+          This will send a DM to you with instructions to claim this account
+          with your Ethereum Address
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleModalClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={() => handleDiscordClaim(oneUps[0].fields.discordUserId)}>
+          <Button
+            variant="primary"
+            onClick={() => handleDiscordClaim(oneUps[0].fields.discordUserId)}
+          >
             Send Message
           </Button>
         </Modal.Footer>
