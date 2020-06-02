@@ -52,6 +52,10 @@ const UserDetail = ({ match, history }) => {
       const submissionRes = await get(
         `submissions/username/${match.params.username}`,
       );
+      if (!submissionRes.data.length) {
+        submissionRes.data = [];
+      }
+
       const oneUpsStatus = res.data.map(oneUp => addOneUpStatus(oneUp));
 
       let ethRes;
