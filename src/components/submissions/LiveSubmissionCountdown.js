@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { liveSubmissionDeadline } from '../../utils/Helpers';
 
-const LiveSubmissionCountdown = () => {
+const LiveSubmissionCountdown = ({ upCount }) => {
   const [countdown, setCountdown] = useState();
 
   useEffect(() => {
@@ -15,25 +15,31 @@ const LiveSubmissionCountdown = () => {
 
   return (
     <>
-      <div className="live-countdown-timer">
-        {countdown ? (
-          <>
-            <div>
-              <p className="number">{countdown.days}</p>
-              <p>Days</p>
-            </div>
-            <div>
-              <p className="number">{countdown.minutes}</p>
-              <p>Minutes</p>
-            </div>
-            <div>
-              <p className="number">{countdown.seconds}</p>
-              <p>Seconds</p>
-            </div>
-          </>
-        ) : null}
-      </div>
-      <p>Left to claim 1ups</p>
+      {countdown ? (
+        <>
+          <div className="live-countdown-timer">
+            <>
+              <div>
+                <p className="number">{countdown.days}</p>
+                <p>Days</p>
+              </div>
+              <div>
+                <p className="number">{countdown.minutes}</p>
+                <p>Minutes</p>
+              </div>
+              <div>
+                <p className="number">{countdown.seconds}</p>
+                <p>Seconds</p>
+              </div>
+            </>
+          </div>
+          {upCount ? (
+            <p>Left to claim {upCount} 1ups</p>
+          ) : (
+            <p>Left to claim 1ups</p>
+          )}
+        </>
+      ) : null}
     </>
   );
 };

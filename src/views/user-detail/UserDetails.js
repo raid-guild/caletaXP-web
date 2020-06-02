@@ -25,6 +25,7 @@ import SubmitToDao from '../../components/submissions/SubmitToDao';
 import SubmissionList from '../../components/submissions/SubmissionList';
 import SubmissionCountdown from '../../components/submissions/SubmissionCountdown';
 import ERC20Abi from '../../contracts/erc20.json';
+import LiveSubmissionCountdown from '../../components/submissions/LiveSubmissionCountdown';
 
 const UserDetail = ({ match, history }) => {
   const [loading, setLoading] = useState(false);
@@ -32,6 +33,7 @@ const UserDetail = ({ match, history }) => {
   const [submissions, setSubmissions] = useState([]);
   const [validSubmissionCount, setValidSubmissionCount] = useState();
   const [userDetail, setUserDetail] = useState();
+  const [otherUserDetail, setOtherUserDetail] = useState();
   const [user3BoxDetail, setUser3BoxDetail] = useState();
   const [upBalance, setUpBalance] = useState();
   const [modalShow, setModalShow] = useState(false);
@@ -52,6 +54,10 @@ const UserDetail = ({ match, history }) => {
       const submissionRes = await get(
         `submissions/username/${match.params.username}`,
       );
+      if (!submissionRes.data.length) {
+        submissionRes.data = [];
+      }
+
       const oneUpsStatus = res.data.map(oneUp => addOneUpStatus(oneUp));
 
       let ethRes;
@@ -63,6 +69,7 @@ const UserDetail = ({ match, history }) => {
         const otherProfile = ethRes.data.find(profile => {
           return profile.fields.username.substr(1) !== match.params.username;
         });
+        setOtherUserDetail(otherProfile.fields);
         const otherUps = await get(
           `one-up/${otherProfile.fields.username.substr(1)}`,
         );
@@ -163,11 +170,6 @@ const UserDetail = ({ match, history }) => {
       <div className="user-details">
         <Row>
           <Col>
-            <h2 className="username">
-              {(userDetail && userDetail.username) ||
-                '@' + match.params.username}
-            </h2>
-            <h3 className="oneup-count">{oneUps.length || 0} 1-Ups</h3>
             {user3BoxDetail && (
               <>
                 <a
@@ -181,7 +183,7 @@ const UserDetail = ({ match, history }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <p>
+                  <h2 className="username">
                     <Image
                       width="40"
                       height="40"
@@ -194,20 +196,23 @@ const UserDetail = ({ match, history }) => {
                       roundedCircle
                     />{' '}
                     {user3BoxDetail.name} {user3BoxDetail.emoji}
-                  </p>
+                  </h2>
                 </a>
-                {upBalance && (
-                  <div className="upBalance">
-                    <h3 className="oneup-count">
-                      Current 1UP Tokens: {parseFloat(upBalance).toFixed(2)}
-                    </h3>
-                  </div>
-                )}
               </>
             )}
+
+            <h3 className="oneup-count">
+              {(userDetail && userDetail.username) ||
+                '@' + match.params.username}
+            </h3>
+
+            {otherUserDetail ? (
+              <h3 className="oneup-count">aka: {otherUserDetail.username}</h3>
+            ) : null}
             <div className="button-options">
               {validSubmissionCount ? (
-                <SubmissionCountdown upCount={validSubmissionCount} />
+                // <SubmissionCountdown upCount={validSubmissionCount} />
+                <LiveSubmissionCountdown upCount={validSubmissionCount} />
               ) : null}
               {currentWeb3User &&
                 currentWeb3User.username &&
@@ -251,6 +256,16 @@ const UserDetail = ({ match, history }) => {
             </div>
           </Col>
           <Col>
+            <h3 className="oneup-count">
+              {oneUps.length || 0} total 1-Ups received
+            </h3>
+            {upBalance && (
+              <div className="upBalance">
+                <h3 className="oneup-count">
+                  Claimed Tokens in DAO: {parseFloat(upBalance).toFixed(2)}
+                </h3>
+              </div>
+            )}
             <p>
               These are the points that others have given to you. You can only
               submit points 1 week after you have earned them!{' '}
