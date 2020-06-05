@@ -1,4 +1,15 @@
 import React from 'react';
+import styled from 'styled-components';
+
+import TwitterIconSrc from '../../assets/img/twitter-icon.svg';
+import TelegramIconSrc from '../../assets/img/telegram-icon.svg';
+
+const TelegramIcon = styled.img`
+  width: 22px;
+`;
+const TwitterIcon = styled.img`
+  width: 22px;
+`;
 
 const Socials = () => {
   return (
@@ -9,7 +20,7 @@ const Socials = () => {
         rel="noopener noreferrer"
         target="_blank"
       >
-        Twitter
+        <TwitterIcon src={TwitterIconSrc} />
       </a>
       <a
         className="nav-item"
@@ -17,7 +28,7 @@ const Socials = () => {
         rel="noopener noreferrer"
         target="_blank"
       >
-        Telegram
+        <TelegramIcon src={TelegramIconSrc} />
       </a>
 {/*       <a
         className="nav-item"

@@ -17,27 +17,29 @@ const LiveSubmissionCountdown = ({ upCount }) => {
     <>
       {countdown ? (
         <>
+        <div className="live-countdown-wrapper">
+          {upCount ? (
+              <p>Time left to claim {upCount} 1UPs:</p>
+            ) : (
+              <p>Submission claim window closes in:</p>
+          )}
           <div className="live-countdown-timer">
             <>
               <div>
                 <p className="number">{countdown.days}</p>
-                <p>Days</p>
+                <p>d</p>
               </div>
               <div>
                 <p className="number">{countdown.minutes}</p>
-                <p>Minutes</p>
+                <p>m</p>
               </div>
               <div>
                 <p className="number">{countdown.seconds}</p>
-                <p>Seconds</p>
+                <p>s</p>
               </div>
             </>
           </div>
-          {upCount ? (
-            <p>Left to claim {upCount} 1ups</p>
-          ) : (
-            <p>Left to claim 1ups</p>
-          )}
+        </div>
         </>
       ) : null}
     </>
