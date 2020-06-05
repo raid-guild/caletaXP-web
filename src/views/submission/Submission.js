@@ -99,14 +99,18 @@ const Submission = ({ match }) => {
               {otherUserDetail ? (
                 <h3>
                   <DiscordIcon src={DiscordIconSrc} />
-                  {otherUserDetail.username}</h3>
+                  {otherUserDetail.username}
+                </h3>
               ) : null}
             </div>
           </Col>
           <Col>
             {submission.fields ? (
               <div>
-                <p>Submitted to {submission.fields.daoName} on {formattedTime(submission.fields.createdAt)}</p>
+                <p>
+                  Submitted to {submission.fields.daoName} on{' '}
+                  {formattedTime(submission.fields.createdAt)}
+                </p>
               </div>
             ) : null}
           </Col>

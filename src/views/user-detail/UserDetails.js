@@ -23,7 +23,6 @@ import { addOneUpStatus } from '../../utils/Helpers';
 import OneUpFeed from '../../components/claims/OneUpFeed';
 import SubmitToDao from '../../components/submissions/SubmitToDao';
 import SubmissionList from '../../components/submissions/SubmissionList';
-import SubmissionCountdown from '../../components/submissions/SubmissionCountdown';
 import ERC20Abi from '../../contracts/erc20.json';
 import LiveSubmissionCountdown from '../../components/submissions/LiveSubmissionCountdown';
 
@@ -67,6 +66,9 @@ const UserDetail = ({ match, history }) => {
       );
       if (!submissionRes.data.length) {
         submissionRes.data = [];
+      }
+      if (!res.data.length) {
+        res.data = [];
       }
 
       const oneUpsStatus = res.data.map(oneUp => addOneUpStatus(oneUp));
@@ -176,17 +178,15 @@ const UserDetail = ({ match, history }) => {
     }
   };
 
+  console.log('userDetail', userDetail);
+  console.log('otehruserDetail', otherUserDetail);
+
   return (
     <>
       <div className="user-details">
         <Row>
           <Col>
-            {/* @HELPME This field should only show up if there's no 3box */}
-            <h2 className="username">
-              {(userDetail && userDetail.username) ||
-                  '@' + match.params.username}
-            </h2>
-            {user3BoxDetail && (
+            {user3BoxDetail ? (
               <>
                 <a
                   href={
@@ -215,23 +215,39 @@ const UserDetail = ({ match, history }) => {
                   </h2>
                 </a>
               </>
+            ) : (
+              <h2 className="username">
+                {(userDetail && userDetail.username) ||
+                  '@' + match.params.username}
+              </h2>
             )}
-            {/* @HELPME Right now there's no way to tell which is which OtherUserDetail, we need logic so the icons are applied correctly */}
             <div className="other-username-wrapper">
               <h3>
-                <TelegramIcon src={TelegramIconSrc} />
+                {userDetail && userDetail.telegramChatId && (
+                  <TelegramIcon src={TelegramIconSrc} />
+                )}
+                {userDetail && userDetail.discordChatId && (
+                  <DiscordIcon src={DiscordIconSrc} />
+                )}
+
                 {(userDetail && userDetail.username) ||
                   '@' + match.params.username}
               </h3>
 
               {otherUserDetail ? (
                 <h3>
-                  <DiscordIcon src={DiscordIconSrc} />
-                  {otherUserDetail.username}</h3>
+                  {otherUserDetail.telegramChatId && (
+                    <TelegramIcon src={TelegramIconSrc} />
+                  )}
+                  {otherUserDetail.discordChatId && (
+                    <DiscordIcon src={DiscordIconSrc} />
+                  )}
+
+                  {otherUserDetail.username}
+                </h3>
               ) : null}
             </div>
             <div className="button-options">
-
               {currentWeb3User &&
                 currentWeb3User.username &&
                 userDetail &&
@@ -274,22 +290,24 @@ const UserDetail = ({ match, history }) => {
             </div>
           </Col>
           <Col>
-            <div class="oneup-total-wrapper">
+            <div className="oneup-total-wrapper">
               <h3 className="oneup-count">
-                {oneUps.length || 0} TOTAL <br /><span>nominations received</span>
+                {oneUps.length || 0} TOTAL <br />
+                <span>nominations received</span>
               </h3>
               {upBalance && (
                 <div className="upBalance">
                   <h3 className="oneup-count">
-                    {parseFloat(upBalance).toFixed(2)} CLAIMED <br /><span>1UP balance</span>
+                    {parseFloat(upBalance).toFixed(2)} CLAIMED <br />
+                    <span>1UP balance</span>
                   </h3>
                 </div>
               )}
             </div>
             {validSubmissionCount ? (
-                // <SubmissionCountdown upCount={validSubmissionCount} />
-                <LiveSubmissionCountdown upCount={validSubmissionCount} />
-              ) : null}
+              // <SubmissionCountdown upCount={validSubmissionCount} />
+              <LiveSubmissionCountdown upCount={validSubmissionCount} />
+            ) : null}
             {/* <p>
               These are the points that others have given to you. You can only
               submit points 1 week after you have earned them!{' '}
