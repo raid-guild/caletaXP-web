@@ -9,14 +9,7 @@ import { get } from '../../utils/Requests';
 import { useInterval } from '../../utils/PollingUtil';
 
 import Socials from '../../components/shared/Socials';
-import DragonQuestSrc from '../../assets/img/dragonquest-sponsor.png';
 import LiveSubmissionCountdown from '../../components/submissions/LiveSubmissionCountdown';
-
-const DragonQuest = styled.img`
-  width: 80%;
-  margin: 0 auto;
-  padding: 30px 0;
-`;
 
 const Home = ({ history }) => {
   const [loading, setLoading] = useState(false);
@@ -55,8 +48,8 @@ const Home = ({ history }) => {
           <Col md="5">
             <h2 className="hero-title">
               Community tracking <br />
-              for MMO coordination <br />
-              games.
+              as an MMO coordination <br />
+              game.
             </h2>
             <p>
               1UP keeps track of value added activities within your community.
@@ -68,15 +61,22 @@ const Home = ({ history }) => {
               our community if you would like to contribute, mind blowing things
               are around the corner.
             </p>
+            <div className="cta-wrapper">
+              <Link to="/info">
+                <Button variant="info" className="button-primary">
+                  Learn More
+                </Button>
+              </Link>
+              <div className="social-wrapper">
+                <Socials />
+              </div>
+              </div>
+              <h3 className="insert-coin">insert coin</h3>
 
-            <Link to="/info">
-              <Button variant="info" className="button-primary">
-                Learn More
-              </Button>
-            </Link>
-            <div className="home-socials">
+
+            {/* <div className="home-socials">
               <Socials />
-            </div>
+            </div> */}
           </Col>
           <Col md="7">
             <Tabs defaultActiveKey="highScores" className="Scoreboard">
@@ -99,22 +99,7 @@ const Home = ({ history }) => {
                 )}
               </Tab>
             </Tabs>
-
             <LiveSubmissionCountdown />
-          </Col>
-        </Row>
-        <Row>
-          <Col md="5">
-            <a
-              href="https://explorer.bounties.network/bounty/3936"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <DragonQuest src={DragonQuestSrc} />
-            </a>
-          </Col>
-          <Col>
-            <h1 className="insert-coin">insert coin</h1>
           </Col>
         </Row>
       </div>

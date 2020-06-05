@@ -23,9 +23,19 @@ import { addOneUpStatus } from '../../utils/Helpers';
 import OneUpFeed from '../../components/claims/OneUpFeed';
 import SubmitToDao from '../../components/submissions/SubmitToDao';
 import SubmissionList from '../../components/submissions/SubmissionList';
-import SubmissionCountdown from '../../components/submissions/SubmissionCountdown';
 import ERC20Abi from '../../contracts/erc20.json';
 import LiveSubmissionCountdown from '../../components/submissions/LiveSubmissionCountdown';
+
+import styled from 'styled-components';
+import TelegramIconSrc from '../../assets/img/telegram-icon.svg';
+import DiscordIconSrc from '../../assets/img/discord-icon.svg';
+
+const TelegramIcon = styled.img`
+  width: 22px;
+`;
+const DiscordIcon = styled.img`
+  width: 22px;
+`;
 
 const UserDetail = ({ match, history }) => {
   const [loading, setLoading] = useState(false);
@@ -56,6 +66,9 @@ const UserDetail = ({ match, history }) => {
       );
       if (!submissionRes.data.length) {
         submissionRes.data = [];
+      }
+      if (!res.data.length) {
+        res.data = [];
       }
 
       const oneUpsStatus = res.data.map(oneUp => addOneUpStatus(oneUp));
@@ -165,12 +178,15 @@ const UserDetail = ({ match, history }) => {
     }
   };
 
+  console.log('userDetail', userDetail);
+  console.log('otehruserDetail', otherUserDetail);
+
   return (
     <>
       <div className="user-details">
         <Row>
           <Col>
-            {user3BoxDetail && (
+            {user3BoxDetail ? (
               <>
                 <a
                   href={
@@ -199,21 +215,39 @@ const UserDetail = ({ match, history }) => {
                   </h2>
                 </a>
               </>
+            ) : (
+              <h2 className="username">
+                {(userDetail && userDetail.username) ||
+                  '@' + match.params.username}
+              </h2>
             )}
+            <div className="other-username-wrapper">
+              <h3>
+                {userDetail && userDetail.telegramChatId && (
+                  <TelegramIcon src={TelegramIconSrc} />
+                )}
+                {userDetail && userDetail.discordChatId && (
+                  <DiscordIcon src={DiscordIconSrc} />
+                )}
 
-            <h3 className="oneup-count">
-              {(userDetail && userDetail.username) ||
-                '@' + match.params.username}
-            </h3>
+                {(userDetail && userDetail.username) ||
+                  '@' + match.params.username}
+              </h3>
 
-            {otherUserDetail ? (
-              <h3 className="oneup-count">aka: {otherUserDetail.username}</h3>
-            ) : null}
-            <div className="button-options">
-              {validSubmissionCount ? (
-                // <SubmissionCountdown upCount={validSubmissionCount} />
-                <LiveSubmissionCountdown upCount={validSubmissionCount} />
+              {otherUserDetail ? (
+                <h3>
+                  {otherUserDetail.telegramChatId && (
+                    <TelegramIcon src={TelegramIconSrc} />
+                  )}
+                  {otherUserDetail.discordChatId && (
+                    <DiscordIcon src={DiscordIconSrc} />
+                  )}
+
+                  {otherUserDetail.username}
+                </h3>
               ) : null}
+            </div>
+            <div className="button-options">
               {currentWeb3User &&
                 currentWeb3User.username &&
                 userDetail &&
@@ -236,7 +270,7 @@ const UserDetail = ({ match, history }) => {
                           variant="info"
                           className="button-primary"
                         >
-                          Claim Your Username
+                          Claim Username
                         </Button>
                       ) : (
                         <Button
@@ -244,7 +278,7 @@ const UserDetail = ({ match, history }) => {
                           variant="info"
                           className="button-primary"
                         >
-                          Claim Your Username
+                          Claim Username
                         </Button>
                       )}
                     </>
@@ -256,38 +290,48 @@ const UserDetail = ({ match, history }) => {
             </div>
           </Col>
           <Col>
-            <h3 className="oneup-count">
-              {oneUps.length || 0} total 1-Ups received
-            </h3>
-            {upBalance && (
-              <div className="upBalance">
-                <h3 className="oneup-count">
-                  Claimed Tokens in DAO: {parseFloat(upBalance).toFixed(2)}
-                </h3>
-              </div>
-            )}
-            <p>
+            <div className="oneup-total-wrapper">
+              <h3 className="oneup-count">
+                {oneUps.length || 0} TOTAL <br />
+                <span>nominations received</span>
+              </h3>
+              {upBalance && (
+                <div className="upBalance">
+                  <h3 className="oneup-count">
+                    {parseFloat(upBalance).toFixed(2)} CLAIMED <br />
+                    <span>1UP balance</span>
+                  </h3>
+                </div>
+              )}
+            </div>
+            {validSubmissionCount ? (
+              // <SubmissionCountdown upCount={validSubmissionCount} />
+              <LiveSubmissionCountdown upCount={validSubmissionCount} />
+            ) : null}
+            {/* <p>
               These are the points that others have given to you. You can only
               submit points 1 week after you have earned them!{' '}
-            </p>
-            <p>
-              <span role="img" aria-label="new">
-                ⭐
-              </span>
-              : New 1Up!
-            </p>
-            <p>
-              <span role="img" aria-label="valid">
-                🍄
-              </span>
-              : In the submission window
-            </p>
-            <p>
-              <span role="img" aria-label="invalid">
-                💀
-              </span>
-              : Too old to submit
-            </p>
+            </p> */}
+            <div className="emoji-wrapper">
+              <p>
+                <span role="img" aria-label="new">
+                  ⭐
+                </span>
+                : New 1UP!
+              </p>
+              <p>
+                <span role="img" aria-label="valid">
+                  🍄
+                </span>
+                : In the submission window
+              </p>
+              <p>
+                <span role="img" aria-label="invalid">
+                  💀
+                </span>
+                : Too old to submit
+              </p>
+            </div>
           </Col>
         </Row>
 
