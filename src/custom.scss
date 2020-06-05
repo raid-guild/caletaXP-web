@@ -315,11 +315,34 @@ a:focus {
   }
 }
 
+
+
 .tab-content {
+  &:after {
+    box-shadow: inset 0 0 8em rgba(45, 45, 45, 0.97);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(black, 1),
+      rgba(black, 1) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    content: '';
+  }
   border-style: double;
   border-color: $primary;
-  // outline: 1px solid $tertiary;
-  // outline-offset: -9px;
+  box-shadow: inset 0 0 8em rgba(35, 35, 35, 0.97);
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(black, 1),
+    rgba(black, 1) 2px,
+    transparent 2px,
+    transparent 4px
+  );
   padding: 20px 20px;
   max-height: 50vh;
   overflow-y: scroll;
@@ -438,6 +461,9 @@ a:focus {
                 width: 140vw !important;
               }
             }
+          }
+          tr {
+            cursor: default;
           }
         }
       }
@@ -760,19 +786,30 @@ table {
     }
   }
 }
+//SUBMISSIONS PAGE IS NOT SUBMISSIONS FEED, FEED IS ON USER-DETAIL PAGE
 .submissions-page {
   .submission-id {
     font-size: 14px;
   }
+  .other-username-wrapper  {
+    margin-top: 20px;
+  }
   .table-outline {
     border-style: double;
     border-color: $primary;
-    outline: 1px solid $tertiary;
-    outline-offset: -9px;
-    padding: 20px 20px;
-    max-height: 30vh;
+    border-radius: 10px;
+    padding: 20px 10px;
+    max-height: 60vh;
     overflow-y: scroll;
     z-index: 3;
+    box-shadow: inset 0 0 8em rgba(35, 35, 35, 0.93);
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(black, 1),
+      rgba(black, 1) 2px,
+      transparent 2px,
+      transparent 4px
+    );
   }
   .table {
     thead,
@@ -789,7 +826,7 @@ table {
         &:nth-child(2) {
           width: 15vw !important;
           @media (min-width: 1280px) {
-            width: 10vw !important;
+            width: 16vw !important;
           }
         }
         &:nth-child(3) {
@@ -804,9 +841,12 @@ table {
         &:nth-child(4) {
           width: 13vw !important;
           @media (min-width: 1280px) {
-            width: 8vw !important;
+            width: 18vw !important;
           }
         }
+      }
+      tr {
+        cursor: default;
       }
     }
   }
