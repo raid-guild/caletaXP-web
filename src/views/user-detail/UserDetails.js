@@ -181,6 +181,13 @@ const UserDetail = ({ match, history }) => {
   console.log('userDetail', userDetail);
   console.log('otehruserDetail', otherUserDetail);
 
+  const noChatIdUsername =
+    userDetail && !userDetail.telegramChatId && !userDetail.discordChatId;
+  const noChatIdOtherUsername =
+    otherUserDetail &&
+    !otherUserDetail.telegramChatId &&
+    !otherUserDetail.discordChatId;
+
   return (
     <>
       <div className="user-details">
@@ -223,9 +230,8 @@ const UserDetail = ({ match, history }) => {
             )}
             <div className="other-username-wrapper">
               <h3>
-                {userDetail && userDetail.telegramChatId && (
-                  <TelegramIcon src={TelegramIconSrc} />
-                )}
+                {(userDetail && userDetail.telegramChatId) ||
+                  (noChatIdUsername && <TelegramIcon src={TelegramIconSrc} />)}
                 {userDetail && userDetail.discordChatId && (
                   <DiscordIcon src={DiscordIconSrc} />
                 )}
@@ -236,9 +242,10 @@ const UserDetail = ({ match, history }) => {
 
               {otherUserDetail ? (
                 <h3>
-                  {otherUserDetail.telegramChatId && (
-                    <TelegramIcon src={TelegramIconSrc} />
-                  )}
+                  {otherUserDetail.telegramChatId ||
+                    (noChatIdOtherUsername && (
+                      <TelegramIcon src={TelegramIconSrc} />
+                    ))}
                   {otherUserDetail.discordChatId && (
                     <DiscordIcon src={DiscordIconSrc} />
                   )}
