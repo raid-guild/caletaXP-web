@@ -231,10 +231,12 @@ const UserDetail = ({ match, history }) => {
             <div className="other-username-wrapper">
               <h3>
                 {(userDetail && userDetail.telegramChatId) ||
-                  (noChatIdUsername && <TelegramIcon src={TelegramIconSrc} />)}
-                {userDetail && userDetail.discordChatId && (
+                noChatIdUsername ? (
+                  <TelegramIcon src={TelegramIconSrc} />
+                ) : null}
+                {userDetail && userDetail.discordChatId ? (
                   <DiscordIcon src={DiscordIconSrc} />
-                )}
+                ) : null}
 
                 {(userDetail && userDetail.username) ||
                   '@' + match.params.username}
@@ -242,13 +244,12 @@ const UserDetail = ({ match, history }) => {
 
               {otherUserDetail ? (
                 <h3>
-                  {otherUserDetail.telegramChatId ||
-                    (noChatIdOtherUsername && (
-                      <TelegramIcon src={TelegramIconSrc} />
-                    ))}
-                  {otherUserDetail.discordChatId && (
+                  {otherUserDetail.telegramChatId || noChatIdOtherUsername ? (
+                    <TelegramIcon src={TelegramIconSrc} />
+                  ) : null}
+                  {otherUserDetail.discordChatId ? (
                     <DiscordIcon src={DiscordIconSrc} />
-                  )}
+                  ) : null}
 
                   {otherUserDetail.username}
                 </h3>
