@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Row, Col, Tabs, Tab, Button, Spinner } from 'react-bootstrap';
-import styled from 'styled-components';
 
 import OneUpFeed from '../../components/claims/OneUpFeed';
 import OneUpHighScores from '../../components/claims/OneUpHighScores';
@@ -70,9 +69,8 @@ const Home = ({ history }) => {
               <div className="social-wrapper">
                 <Socials />
               </div>
-              </div>
-              <h3 className="insert-coin">insert coin</h3>
-
+            </div>
+            <h3 className="insert-coin">insert coin</h3>
 
             {/* <div className="home-socials">
               <Socials />

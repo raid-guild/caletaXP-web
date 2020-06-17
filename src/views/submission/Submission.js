@@ -23,9 +23,10 @@ const Submission = ({ match }) => {
   const [oneUps, setOneUps] = useState([]);
   const [submission, setSubmission] = useState([]);
   const [userDetail, setUserDetail] = useState();
-  const [otherUserDetail, setOtherUserDetail] = useState();
-  const [user3BoxDetail, setUser3BoxDetail] = useState();
-  // const [currentWeb3User, setCurrentUser] = useContext(CurrentUserContext);
+  const [otherUserDetail] = useState();
+  // const [otherUserDetail, setOtherUserDetail] = useState();
+  const [, setUser3BoxDetail] = useState();
+  // const [user3BoxDetail, setUser3BoxDetail] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,7 +41,6 @@ const Submission = ({ match }) => {
           setOneUps(oneUpsRes.data);
         }
 
-        console.log('submissionRes.data', submissionRes.data);
         setSubmission(submissionRes.data[0]);
         setLoading(false);
       } catch (err) {
