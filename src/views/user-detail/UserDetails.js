@@ -86,6 +86,10 @@ const UserDetail = ({ match, history }) => {
         const otherUps = await get(
           `one-up/${otherProfile.fields.username.substr(1)}`,
         );
+
+        if (!otherUps.data.length) {
+          otherUps.data = [];
+        }
         const otherUpsStatus = otherUps.data.map(oneUp =>
           addOneUpStatus(oneUp),
         );
@@ -177,9 +181,6 @@ const UserDetail = ({ match, history }) => {
       console.log('sent dm', res);
     }
   };
-
-  console.log('userDetail', userDetail);
-  console.log('otehruserDetail', otherUserDetail);
 
   const noChatIdUsername =
     userDetail && !userDetail.telegramChatId && !userDetail.discordChatId;
