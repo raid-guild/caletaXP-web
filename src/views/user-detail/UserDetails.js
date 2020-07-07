@@ -129,8 +129,8 @@ const UserDetail = ({ match, history }) => {
 
   useEffect(() => {
     const upAddress =
-      +process.env.REACT_APP_CHAIN_ID === 42
-        ? addresses.kovan.upToken
+      +process.env.REACT_APP_CHAIN_ID === 100
+        ? addresses.xdai.upToken
         : addresses.main.upToken;
 
     const get3BoxProfileAndTokens = async () => {

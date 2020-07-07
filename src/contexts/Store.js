@@ -14,8 +14,10 @@ export const addresses = {
   },
   kovan: {
     upToken: '0xd0a1e359811322d97991e03f863a0c30c2cf029c',
-  }
-  
+  },
+  xdai: {
+    upToken: '0x385a78159a02128439cafcfdb7797ede99bf4a5f',
+  },
 };
 
 const Store = ({ children }) => {
@@ -32,15 +34,14 @@ const Store = ({ children }) => {
   useEffect(() => {
     const initCurrentUser = async () => {
       let user;
-      
+
       try {
         const w3c = await w3connect(web3Connect);
         const [account] = await w3c.web3.eth.getAccounts();
         setWeb3Connect(w3c);
         user = createWeb3User(account);
-        
-        setCurrentUser(user);
 
+        setCurrentUser(user);
       } catch (e) {
         console.error(`Could not log in with web3`);
       }
@@ -51,8 +52,6 @@ const Store = ({ children }) => {
     }
     //TODO: if web3 is not availible
     //     w3c.web3 = new Web3(new Web3.providers.HttpProvider(process.env.REACT_APP_INFURA_URI));
-
-
   }, [web3Connect]);
 
   return (
