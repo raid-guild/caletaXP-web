@@ -1,5 +1,5 @@
 import Web3 from 'web3';
-import Web3Connect from 'web3connect';
+import Web3Modal from 'web3modal';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 
 import { getChainData } from './Chains';
@@ -45,9 +45,9 @@ export const w3connect = async web3Connect => {
     alert(
       `Please switch Web3 to the correct network and try signing in again. Detected network: ${
         getChainData(injectedChainId).network
-      }, Required network: ${
-        getChainData(+process.env.REACT_APP_CHAIN_ID).network
-      }`,
+      }, Required chain: ${
+        getChainData(+process.env.REACT_APP_CHAIN_ID).chain
+      } network: ${getChainData(+process.env.REACT_APP_CHAIN_ID).network}`,
     );
     throw new Error(
       `Injected web3 chainId: ${injectedChainId}, config: ${+process.env
@@ -65,7 +65,7 @@ export const signInWithWeb3 = async () => {
     '+process.env.REACT_APP_CHAIN_ID: ',
     +process.env.REACT_APP_CHAIN_ID,
   );
-  const web3Connect = new Web3Connect.Core({
+  const web3Connect = new Web3Modal({
     network: getChainData(+process.env.REACT_APP_CHAIN_ID).network, // optional
     providerOptions, // required
   });
