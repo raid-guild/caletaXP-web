@@ -11,11 +11,11 @@ const SubmitToDao = ({ oneUps, user }) => {
 
   // TODO: This can be variable when we have more daos
   const daoData = {
-    address: '0xafdd1eb2511cd891acf2bff82dabf47e0c914d24',
+    address: '0x82683ba6f0d0c2f28f0c9471dbd19fc70802107b',
     name: '1UP',
-    host: 'https://alchemy.daostack.io',
+    host: 'https://alchemy-staging-xdai.herokuapp.com',
     route:
-      '/dao/0xafdd1eb2511cd891acf2bff82dabf47e0c914d24/scheme/0x6da49c4e88ae95c4faaa9c2133b1fa7190b763cebc3d62332b1b07c859311221/proposals/create/',
+      '/dao/0x82683ba6f0d0c2f28f0c9471dbd19fc70802107b/scheme/0xbf9a7745d31af99fec91a36078a96af9cf81e0bf07de23423e82f3ee06ea32e2/proposals/create/',
   };
 
   useEffect(() => {
