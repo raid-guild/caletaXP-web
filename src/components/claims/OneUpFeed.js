@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Table } from 'react-bootstrap';
+import { Table, Modal, Button } from 'react-bootstrap';
 import _ from 'lodash';
 import { timeAgo } from '../../utils/Helpers';
 
 const OneUpFeed = ({ oneUps, handleNav, isUserDetail, isSubmissionDetail }) => {
   const [sortedOneUps, setSortedOneUps] = useState([]);
+  const [modalShow, setModalShow] = useState(false);
+  const [selected, setSelected] = useState({});
+
+  const handleModalClose = () => setModalShow(false);
+  const handleModalShow = () => {
+    setModalShow(true);
+  };
 
   useEffect(() => {
     setSortedOneUps(
@@ -16,16 +23,19 @@ const OneUpFeed = ({ oneUps, handleNav, isUserDetail, isSubmissionDetail }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [oneUps]);
 
-  const handleClick = username => {
+  const handleClick = oneUp => {
     if (handleNav) {
-      handleNav(username);
+      handleNav(oneUp.fields.username);
+    } else {
+      setSelected(oneUp);
+      handleModalShow();
     }
   };
 
   const renderRows = () => {
     return sortedOneUps.map(oneUp => {
       return (
-        <tr key={oneUp.id} onClick={() => handleClick(oneUp.fields.username)}>
+        <tr key={oneUp.id} onClick={() => handleClick(oneUp)}>
           {isUserDetail ? <td>{oneUp.status.icon}</td> : null}
           {!isUserDetail ? <td>{oneUp.fields.username}</td> : null}
           <td>{oneUp.fields.sender}</td>
@@ -56,6 +66,27 @@ const OneUpFeed = ({ oneUps, handleNav, isUserDetail, isSubmissionDetail }) => {
         </thead>
         <tbody>{renderRows()}</tbody>
       </Table>
+      <Modal show={modalShow} onHide={handleModalClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>1up detail</Modal.Title>
+        </Modal.Header>
+        <Modal.Body style={{ backgroundColor: '#000' }}>
+          {selected.fields && (
+            <>
+              <p>Chat Title: {selected.fields.chatTitle}</p>
+              <p>Created At: {selected.fields.createdAt}</p>
+              <p>Message: {selected.fields.message}</p>
+              <p>Sender: {selected.fields.sender}</p>
+              <p>sourceName: {selected.fields.sourceName}</p>
+            </>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleModalClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };
